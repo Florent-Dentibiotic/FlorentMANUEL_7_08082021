@@ -1,0 +1,36 @@
+.btn{
+    &__secondary{
+        background-color: $secondary;
+        width: 182px;
+        font-weight: 700;
+        border-radius: 5px;
+        border: none;
+        display: none;
+        a{
+            color: $black;
+        }
+    }
+    &__primary{
+        background-color: $primary;
+        color: $white;
+        width: 170px;
+        height: 69px;
+        font-weight: 700;
+        font-size: 20px;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+        &:hover{
+            background-color: $secondary;
+            color: $black;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .btn{
+        &__primary{
+            font-size: 18px;
+        }
+    } 
+}
