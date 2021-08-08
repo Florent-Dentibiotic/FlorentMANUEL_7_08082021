@@ -1,0 +1,48 @@
+.recipes{
+    margin-top: 1.5em;
+    display: grid;
+    grid-template-columns: 
+    repeat(auto-fill,
+    minmax(380px, auto));
+    gap: 50px;
+    .recipe{
+        background-color: $lightgrey;
+        border-radius: 5px;
+        &__img{
+            height: 178px;
+            background-color: $grey;
+            border-radius: 5px 5px 0 0;
+        }
+        &__details{
+            padding: 1.5em;
+            display: grid;
+            grid-template-areas: 
+                "a a a b"
+                "c c d d";
+            h2{
+                grid-area: a;
+                font-size: 18px;
+                font-weight: 400;
+            }
+            h3{
+                grid-area: b;
+                font-size: 18px;
+                font-weight: 700;
+            }
+            ul, p{
+
+                font-size: 12px;
+                font-weight: 400;
+            }
+            ul{
+                grid-area: c;
+                list-style: none;
+                padding: 0;
+            }
+            p{
+                grid-area: d;
+                margin-left: 1em;
+            }
+        }
+    }
+}
