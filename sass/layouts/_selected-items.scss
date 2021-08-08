@@ -1,0 +1,22 @@
+.selected__items{
+    display: flex;
+    justify-content: start;
+    text-align: center;
+    margin: 1em auto;
+    .item{
+        border-radius: 5px;
+        padding: .5em 1em;
+        margin-right: .5em;
+        font-size: 14px;
+        color: $white;
+    }
+    .ingredient{
+        background-color: $primary;
+    }
+    .appliance{
+        background-color: $secondary;
+    }
+    .ustensil{
+        background-color: $tertiary;
+    }
+}

@@ -4,12 +4,12 @@
 @import "./base/base";
 @import "./base/typography";
 @import "./components/buttons";
-//@import "./components/inputs";
+@import "./components/fas";
 @import "./components/tags";
 @import "./components/logo";
 @import "./layouts/header";
 @import "./layouts/main";
-@import "./layouts/modals";
 @import "./layouts/classify";
+@import "./layouts/selected-items";
 @import "./pages/index";
 @import "./pages/photographers";

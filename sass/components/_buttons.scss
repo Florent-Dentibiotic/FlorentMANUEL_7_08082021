@@ -1,36 +1,24 @@
 .btn{
-    &__secondary{
-        background-color: $secondary;
-        width: 182px;
-        font-weight: 700;
-        border-radius: 5px;
-        border: none;
-        display: none;
-        a{
-            color: $black;
-        }
-    }
+    width: 170px;
+    height: 69px;
+    font-size: 18px;
+    color: $white;
+    border: none;
+    border-radius: 5px;
+    text-align: start;
+    padding-left: 1em;
+    position: relative;
     &__primary{
         background-color: $primary;
-        color: $white;
-        width: 170px;
-        height: 69px;
-        font-weight: 700;
-        font-size: 20px;
-        border-radius: 5px;
-        border: none;
-        text-align: center;
-        &:hover{
-            background-color: $secondary;
-            color: $black;
-        }
     }
-}
-
-@media screen and (max-width: 768px) {
-    .btn{
-        &__primary{
-            font-size: 18px;
-        }
-    } 
+    &__secondary{
+        background-color: $secondary;
+    }
+    &__tertiary{
+        background-color: $tertiary;
+    }
+    &__group{
+        display: flex;
+        justify-content: start;
+    }
 }
