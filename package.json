@@ -1,0 +1,22 @@
+{
+  "name": "florentmanuel_7_08082021",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./scss/bootstrap.scss:./css/bootstrap.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Florent-Dentibiotic/FlorentMANUEL_7_08082021.git"
+  },
+  "dependencies": {
+    "bootstrap": "4.2.1"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Florent-Dentibiotic/FlorentMANUEL_7_08082021/issues"
+  },
+  "homepage": "https://github.com/Florent-Dentibiotic/FlorentMANUEL_7_08082021#readme"
+}
