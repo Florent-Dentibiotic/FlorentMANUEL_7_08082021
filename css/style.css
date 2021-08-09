@@ -127,18 +127,22 @@ body {
   padding: 1.5em;
   display: grid;
   grid-template-areas: "a a a b" "c c d d";
+  gap: 20px;
+}
+.recipes .recipe__details h2, .recipes .recipe__details h3 {
+  margin: 0;
+  font-size: 18px;
 }
 .recipes .recipe__details h2 {
   grid-area: a;
-  font-size: 18px;
   font-weight: 400;
 }
 .recipes .recipe__details h3 {
   grid-area: b;
-  font-size: 18px;
   font-weight: 700;
 }
 .recipes .recipe__details ul, .recipes .recipe__details p {
+  margin: 0;
   font-size: 12px;
   font-weight: 400;
 }
@@ -149,7 +153,6 @@ body {
 }
 .recipes .recipe__details p {
   grid-area: d;
-  margin-left: 1em;
 }
 
 /*# sourceMappingURL=style.css.map */

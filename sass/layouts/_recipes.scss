@@ -19,18 +19,21 @@
             grid-template-areas: 
                 "a a a b"
                 "c c d d";
+            gap: 20px;
+            h2, h3{
+                margin: 0;
+                font-size: 18px;
+            }
             h2{
                 grid-area: a;
-                font-size: 18px;
                 font-weight: 400;
             }
             h3{
                 grid-area: b;
-                font-size: 18px;
                 font-weight: 700;
             }
             ul, p{
-
+                margin: 0;
                 font-size: 12px;
                 font-weight: 400;
             }
@@ -41,7 +44,6 @@
             }
             p{
                 grid-area: d;
-                margin-left: 1em;
             }
         }
     }
