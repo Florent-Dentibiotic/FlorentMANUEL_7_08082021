@@ -14,15 +14,19 @@ body, main {
 }
 
 .mx-3 {
-  margin: 1em auto;
+  margin: 1em 0;
 }
 
 .my-3 {
-  margin: auto 1em;
+  margin: 0 1em;
 }
 
 body {
-  font-family: "DM Sans", sans-serif;
+  font-family: Lato, "DM Sans", sans-serif;
+}
+
+p {
+  font-family: Roboto;
 }
 
 .btn {
@@ -85,6 +89,37 @@ body {
   padding-left: 1em;
 }
 
+.ingredients__menu, .appliance__menu, .ustensils__menu {
+  border-radius: 0 0 5px 5px;
+}
+.ingredients__menu ul, .appliance__menu ul, .ustensils__menu ul {
+  margin-top: -5px;
+  list-style: none;
+  padding: 0;
+  color: #fff;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(222px, auto));
+  width: 666px;
+  max-height: 328px;
+  font-size: 18px;
+  padding: 12px;
+}
+.ingredients__menu li, .appliance__menu li, .ustensils__menu li {
+  padding: 5px;
+}
+
+.ingredients__menu {
+  background-color: #3282F7;
+}
+
+.appliance__menu {
+  background-color: #68D9A4;
+}
+
+.ustensils__menu {
+  background-color: #ED6454;
+}
+
 .selected__items {
   display: flex;
   justify-content: start;
@@ -124,10 +159,10 @@ body {
   border-radius: 5px 5px 0 0;
 }
 .recipes .recipe__details {
-  padding: 1.5em;
+  padding: 20px 18px 15px 20px;
   display: grid;
   grid-template-areas: "a a a b" "c c d d";
-  gap: 20px;
+  height: 186px;
 }
 .recipes .recipe__details h2, .recipes .recipe__details h3 {
   margin: 0;
@@ -152,7 +187,13 @@ body {
   padding: 0;
 }
 .recipes .recipe__details p {
+  display: block;
   grid-area: d;
+  overflow: hidden;
+  white-space: pre-line;
+  text-overflow: ellipsis;
+  height: 109px;
+  width: 171px;
 }
 
 /*# sourceMappingURL=style.css.map */
