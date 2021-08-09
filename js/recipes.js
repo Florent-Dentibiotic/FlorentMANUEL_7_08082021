@@ -12,6 +12,10 @@ let newApplianceUl = document.createElement('ul')
 applianceMenu.appendChild(newApplianceUl)
 let newApplianceArray = []
 
+let newUstensilsUl = document.createElement('ul')
+ustensilsMenu.appendChild(newUstensilsUl)
+let newUstensilsArray = []
+
 fetch(myRequest)
 .then(response => response.json())
 .then(function extractRecipes(data){
@@ -49,6 +53,7 @@ fetch(myRequest)
         let newP = document.createElement('p')
         newRecipeDetails.appendChild(newP)
         newP.textContent = data.recipes[i].description
+        let allUstensils = data.recipes[i].ustensils
         // adding all ingredients/appliance/ustensils to the ingredients input
         for(let i = 0; i < allIngredients.length; i++){
             if(! newIngredientsArray.includes(allIngredients[i].ingredient)){
@@ -64,14 +69,14 @@ fetch(myRequest)
             newApplianceUl.appendChild(newLi)
             newLi.textContent = data.recipes[i].appliance
         }
-        /*for(let i = 0; i < allIngredients.length; i++){
-            if(! newIngredientsArray.includes(allIngredients[i].ingredient)){
-                newIngredientsArray.push(allIngredients[i].ingredient)
+        for(let i = 0; i < allUstensils.length; i++){
+            if(! newUstensilsArray.includes(allUstensils[i])){
+                newUstensilsArray.push(allUstensils[i])
                 let newLi = document.createElement('li')
-                newIngredientUl.appendChild(newLi)
-                newLi.textContent = allIngredients[i].ingredient
+                newUstensilsUl.appendChild(newLi)
+                newLi.textContent = allUstensils[i]
             } 
-        }*/
+        }
     } 
     }
     );
