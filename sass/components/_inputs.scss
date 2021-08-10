@@ -1,5 +1,5 @@
-.btn{
-    min-width: 170px;
+.input__search{
+    min-width: 670px;
     height: 69px;
     font-size: 18px;
     color: $white;
@@ -8,6 +8,11 @@
     text-align: start;
     padding-left: 1em;
     position: relative;
+    outline: none;
+    ::-webkit-input-placeholder {color:$white;}
+    ::-moz-placeholder {color:$white;}
+    ::-ms-placeholder {color:$white;}
+    ::placeholder {color:$white;}
     &__primary{
         background-color: $primary;
     }
@@ -16,9 +21,5 @@
     }
     &__tertiary{
         background-color: $tertiary;
-    }
-    &__group{
-        display: flex;
-        justify-content: start;
     }
 }

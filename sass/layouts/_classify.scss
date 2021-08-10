@@ -1,5 +1,12 @@
+.btn__group__search{
+    position: relative;
+}
+
 .ingredients__menu, .appliance__menu, .ustensils__menu{
     border-radius: 0 0 5px 5px;
+    position: absolute;
+    top: 65px;
+    overflow: hidden;
     ul{
         margin-top: -5px;
         list-style: none;
@@ -9,7 +16,7 @@
         grid-template-columns: 
         repeat(auto-fill,
         minmax(222px, auto));
-        width: 666px;
+        max-width: 666px;
         max-height: 328px;
         font-size: 18px;
         padding: 12px;

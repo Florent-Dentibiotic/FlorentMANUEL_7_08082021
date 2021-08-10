@@ -10,13 +10,13 @@
         font-size: 14px;
         color: $white;
     }
-    .ingredient{
+    &__ingredient{
         background-color: $primary;
     }
-    .appliance{
+    &__appliance{
         background-color: $secondary;
     }
-    .ustensil{
+    &__ustensil{
         background-color: $tertiary;
     }
 }

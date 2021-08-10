@@ -30,7 +30,7 @@ p {
 }
 
 .btn {
-  width: 170px;
+  min-width: 170px;
   height: 69px;
   font-size: 18px;
   color: #fff;
@@ -52,6 +52,40 @@ p {
 .btn__group {
   display: flex;
   justify-content: start;
+}
+
+.input__search {
+  min-width: 670px;
+  height: 69px;
+  font-size: 18px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-align: start;
+  padding-left: 1em;
+  position: relative;
+  outline: none;
+}
+.input__search ::-webkit-input-placeholder {
+  color: #fff;
+}
+.input__search ::-moz-placeholder {
+  color: #fff;
+}
+.input__search ::-ms-placeholder {
+  color: #fff;
+}
+.input__search ::placeholder {
+  color: #fff;
+}
+.input__search__primary {
+  background-color: #3282F7;
+}
+.input__search__secondary {
+  background-color: #68D9A4;
+}
+.input__search__tertiary {
+  background-color: #ED6454;
 }
 
 .fa-search {
@@ -89,8 +123,15 @@ p {
   padding-left: 1em;
 }
 
+.btn__group__search {
+  position: relative;
+}
+
 .ingredients__menu, .appliance__menu, .ustensils__menu {
   border-radius: 0 0 5px 5px;
+  position: absolute;
+  top: 65px;
+  overflow: hidden;
 }
 .ingredients__menu ul, .appliance__menu ul, .ustensils__menu ul {
   margin-top: -5px;
@@ -99,7 +140,7 @@ p {
   color: #fff;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(222px, auto));
-  width: 666px;
+  max-width: 666px;
   max-height: 328px;
   font-size: 18px;
   padding: 12px;
@@ -133,13 +174,13 @@ p {
   font-size: 14px;
   color: #fff;
 }
-.selected__items .ingredient {
+.selected__items__ingredient {
   background-color: #3282F7;
 }
-.selected__items .appliance {
+.selected__items__appliance {
   background-color: #68D9A4;
 }
-.selected__items .ustensil {
+.selected__items__ustensil {
   background-color: #ED6454;
 }
 
