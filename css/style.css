@@ -188,6 +188,7 @@ p {
 
 .recipes {
   margin-top: 1.5em;
+  margin-bottom: 3em;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, auto));
   gap: 50px;

@@ -5,6 +5,7 @@ const applianceMenu = document.querySelector('.appliance__menu')
 const ustensilsMenu = document.querySelector('.ustensils__menu')
 const btnSearchNodes = document.querySelectorAll('.btn__group__search')
 const btnSearch = Array.from(btnSearchNodes)
+const firstInputSearch = document.querySelector('.first__form__input')
 const inputsSearchNodes = document.querySelectorAll('.input__search')
 const inputsSearch = Array.from(inputsSearchNodes)
 let allRecipes = {}
@@ -18,6 +19,7 @@ let everyUstensils = {}
 btnSearch.forEach(element => element.addEventListener('focusin', openSearchInput))
 chevronUp.forEach(element => element.addEventListener('click', closeSearchInput))
 inputsSearch.forEach(element => element.addEventListener('keyup', searchItem))
+firstInputSearch.addEventListener('keyup', searchItem)
 
 function openSearchInput(){
     let btnActive = btnSearch.filter(element => element.firstElementChild.classList[2] == 'd-none')
@@ -153,7 +155,7 @@ function deployInputsElements(data){
 
 // Add and Remove Selected items from inputs lists
 function selectElement(){
-    this.parentElement.parentElement.previousElementSibling.firstElementChild.value = this.innerText
+    searchRecipe(this)
     let newDiv = document.createElement('div')
     selectedItems.appendChild(newDiv)
     newDiv.classList.add("item")
@@ -185,19 +187,30 @@ function searchItem(){
         Array.from(newUstensilsUl.children).forEach(element => element.remove())
         thisArray.forEach(element => newUstensilsUl.appendChild(element))
         searchRecipe(this)
+    } else if (this.classList[0] == 'first__form__input'){
+        let thisIngredientArray = Array.from(everyIngredients).filter(element => element.innerHTML.toLowerCase().includes(this.value.toLowerCase()))
+        Array.from(newIngredientUl.children).forEach(element => element.remove())
+        thisIngredientArray.forEach(element => newIngredientUl.appendChild(element))
+        let thisApplianceArray = Array.from(everyAppliances).filter(element => element.innerHTML.toLowerCase().includes(this.value.toLowerCase()))
+        Array.from(newApplianceUl.children).forEach(element => element.remove())
+        thisApplianceArray.forEach(element => newApplianceUl.appendChild(element))
+        let thisUstensilsArray = Array.from(everyUstensils).filter(element => element.innerHTML.toLowerCase().includes(this.value.toLowerCase()))
+        Array.from(newUstensilsUl.children).forEach(element => element.remove())
+        thisUstensilsArray.forEach(element => newUstensilsUl.appendChild(element))
+        searchRecipe(this)
     }
 }
 
 // search recipe from ingredients/appliance/ustensils
 function searchRecipe(data){
-    let allRecipesIngredients = document.querySelectorAll('.recipe__ingredient')
     let allRecipeData = document.querySelectorAll('.recipe')
+    let allRecipeMethod = document.querySelectorAll('.recipe__howto')
     if(data.value.length >= 3){
         if(data.classList[1] == 'input__search__primary'){
             for (let i = 0; i < allRecipesIngredients.length; i++){
-                let isInclude = Array.from(allRecipesIngredients[i].children).some(element => element.innerHTML.toLowerCase().includes(data.value.toLowerCase()))
+                let isInclude = Array.from(allRecipeData[i].lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(data.value.toLowerCase()))
                 if(isInclude == false){
-                    allRecipesIngredients[i].parentElement.parentElement.classList.replace('d-block', 'd-none')
+                    allRecipeData[i].classList.replace('d-block', 'd-none')
                 } else {
                     allRecipeData[i].classList.replace('d-none', 'd-block')
                 }
@@ -220,7 +233,30 @@ function searchRecipe(data){
                     allRecipeData[i].classList.replace('d-none', 'd-block')
                 }
             }  
-        }
+        } 
+        // for first input to check in ingredients/appliance/ustensils/recipe
+        else if (data.classList[0] == 'first__form__input'){
+            for (let i = 0; i < allRecipeData.length; i++){
+                let isIngredient = Array.from(allRecipeData[i].lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(data.value.toLowerCase()))
+                let isAppliance = allRecipeData[i].attributes[1].value.toLowerCase().includes(data.value.toLowerCase()) 
+                let isUstensil = allRecipeData[i].attributes[2].value.toLowerCase().includes(data.value.toLowerCase())
+                let isMethod = allRecipeMethod[i].innerHTML.toLowerCase().includes(data.value.toLowerCase())
+                if(isIngredient == false && isAppliance == false && isUstensil == false && isMethod == false){
+                    recipesSection.children[i].classList.replace('d-block', 'd-none')
+                } 
+            }  
+        } 
+    } else if (data.classList[0] == 'ingredient' || data.classList[0] == 'appliance' || data.classList[0] == 'ustensil'){
+        for (let i = 0; i < allRecipeData.length; i++){
+            let isIngredient = Array.from(allRecipeData[i].lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(data.innerHTML.toLowerCase()))
+            let isAppliance = allRecipeData[i].attributes[1].value.toLowerCase().includes(data.innerHTML.toLowerCase()) 
+            let isUstensil = allRecipeData[i].attributes[2].value.toLowerCase().includes(data.innerHTML.toLowerCase())
+            if(isIngredient == false && isAppliance == false && isUstensil == false){
+                recipesSection.children[i].classList.replace('d-block', 'd-none')
+            } else {
+                recipesSection.children[i].classList.replace('d-none', 'd-block')
+            }
+        } 
     } else {
         for (let i = 0; i < recipesSection.children.length; i++){
             recipesSection.children[i].classList.replace('d-none', 'd-block')
