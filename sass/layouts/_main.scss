@@ -1,8 +1,10 @@
 .main{
-    form{
+    form, .first__form{
         position: relative;
+    }   
+    .first__form{
         margin: 1em auto;
-        input{
+        &__input{
             width: 100%;
             height: 69px;
             background-color: $lightgrey;
