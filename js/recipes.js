@@ -183,7 +183,6 @@ function selectElement(data){
                 if(isInclude == false){
                     recipe.classList.replace('d-block', 'd-none')
                 } 
-                console.log(isInclude)
             }
         } else if(data.classList[1] == 'selected__items__appliance'){
             for(const recipe of allRecipeData){
@@ -191,9 +190,6 @@ function selectElement(data){
                 if(isInclude == false){
                     recipe.classList.replace('d-block', 'd-none')
                 } 
-                /*console.log(recipe.attributes[1].value)
-                console.log(data.innerText)*/
-                console.log(isInclude)
             }
         } else if(data.classList[1] == 'selected__items__ustensil'){
             for(const recipe of allRecipeData){
@@ -201,9 +197,6 @@ function selectElement(data){
                 if(isInclude == false){
                     recipe.classList.replace('d-block', 'd-none')
                 } 
-                /*console.log(recipe.attributes[2].value)
-                console.log(data.innerText)*/
-                console.log(isInclude)
             }
         } 
     } else if(this.classList[0] == 'ingredient'){
