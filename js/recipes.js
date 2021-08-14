@@ -21,7 +21,7 @@ let everyUstensils = {}
 btnSearch.forEach(element => element.addEventListener('focusin', openSearchInput))
 chevronUp.forEach(element => element.addEventListener('click', closeSearchInput))
 inputsSearch.forEach(element => element.addEventListener('keyup', searchItem))
-firstInputSearch.addEventListener('keyup', searchItem)
+firstInputSearch.addEventListener('keyup', searchRecipe)
 
 function openSearchInput(){
     let btnActive = btnSearch.filter(element => element.firstElementChild.classList[2] == 'd-none')
@@ -165,6 +165,7 @@ function deployInputsElements(data){
 
 // Add and Remove Selected items from inputs lists
 function selectElement(data){
+    console.log(data)
     if(this.classList != undefined){
         let newDiv = document.createElement('div')
         selectedItems.appendChild(newDiv)
@@ -177,9 +178,8 @@ function selectElement(data){
     }
 
     if(this.classList == undefined) {
-        console.log(data)
         if(data.classList[1] == 'selected__items__ingredient'){
-            //console.log(data.innerText)
+            console.log(data.innerText)
             for(const recipe of allRecipeData){
                 let isInclude = Array.from(recipe.lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(data.innerText.toLowerCase()))
                 if(isInclude == false){
@@ -187,19 +187,24 @@ function selectElement(data){
                 } else {
                     recipe.classList.replace('d-none', 'd-block')
                 }
+                console.log(isInclude)
             }
         } else if(data.classList[1] == 'selected__items__appliance'){
             for(const recipe of allRecipeData){
-                let isInclude = recipe.attributes[1].value.toLowerCase().includes(data.innerText.toLowerCase())
+                let isInclude = recipe.attributes[1].value.toLowerCase().includes(data.innerText.trim().toLowerCase())
                 if(isInclude == false){
                     recipe.classList.replace('d-block', 'd-none')
                 } else {
                     recipe.classList.replace('d-none', 'd-block')
                 }
+                console.log(recipe.attributes[1].value)
+                console.log(data.innerText)
+                console.log(isInclude)
             }
         } else if(data.classList[1] == 'selected__items__ustensil'){
             for(const recipe of allRecipeData){
-                let isInclude = recipe.attributes[2].value.toLowerCase().includes(data.innerText.toLowerCase())
+                console.log(recipe.attributes[2].value)
+                let isInclude = recipe.attributes[2].value.toLowerCase().includes(data.innerText.trim().toLowerCase())
                 if(isInclude == false){
                     recipe.classList.replace('d-block', 'd-none')
                 } else {
@@ -245,11 +250,9 @@ function filterItems(){
 
 function removeElement(){
     this.parentElement.remove()
-    if(selectedItems.children.length == 1){
-        selectElement(selectedItems.children[0])
-    } else if(selectedItems.children.length == 2){
-        selectElement(selectedItems.children[0])
-        selectElement(selectedItems.children[1])
+    if(selectedItems.children.length > 0){
+        for(const child of selectedItems.children)
+        selectElement(child)
     } else {
         for (const child of recipesSection.children){
             child.classList.replace('d-none', 'd-block')
@@ -286,63 +289,23 @@ function searchItem(){
 }
 
 // search recipe from ingredients/appliance/ustensils
-/*function searchRecipe(data, source){
-    let allRecipeMethod = document.querySelectorAll('.recipe__howto')
-    if(data.value.length >= 3){
-        if(data.classList[1] == 'input__search__primary'){
-            for (let i = 0; i < allRecipeData.length; i++){
-                let isInclude = Array.from(allRecipeData[i].lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(data.value.toLowerCase()))
-                if(isInclude == false){
-                    allRecipeData[i].classList.replace('d-block', 'd-none')
-                } else {
-                    allRecipeData[i].classList.replace('d-none', 'd-block')
-                }
+function searchRecipe(data, source){
+    if(this.value.length >= 3){
+        for(const recipe of allRecipeData){
+            let ingredientsIncluded = Array.from(recipe.lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(this.value.toLowerCase()))
+            let appliancesIncluded = recipe.attributes[1].value.toLowerCase().includes(this.value.toLowerCase())
+            let ustensilsIncluded = recipe.attributes[2].value.toLowerCase().includes(this.value.toLowerCase())
+            let methodIncluded = recipe.children[1].lastElementChild.innerHTML.toLowerCase().includes(this.value.toLowerCase())
+            if(ingredientsIncluded == false && appliancesIncluded == false && ustensilsIncluded == false && methodIncluded == false){
+                recipe.classList.replace('d-block', 'd-none')
+                filterItems()
+            } else{
+                recipe.classList.replace('d-none', 'd-block')
             }
-        } else if (data.classList[1] == 'input__search__secondary'){
-            for (let i = 0; i < allRecipeData.length; i++){
-                let isInclude = allRecipeData[i].attributes[1].value.toLowerCase().includes(data.value.toLowerCase())
-                if(isInclude == false){
-                    allRecipeData[i].classList.replace('d-block', 'd-none')
-                } else {
-                    allRecipeData[i].classList.replace('d-none', 'd-block')
-                }
-            }  
-        } else if (data.classList[1] == 'input__search__tertiary'){
-            for (let i = 0; i < allRecipeData.length; i++){
-                let isInclude = allRecipeData[i].attributes[2].value.toLowerCase().includes(data.value.toLowerCase())
-                if(isInclude == false){
-                    allRecipeData[i].classList.replace('d-block', 'd-none')
-                } else {
-                    allRecipeData[i].classList.replace('d-none', 'd-block')
-                }
-            }  
-        } 
-        // for first input to check in ingredients/appliance/ustensils/recipe
-        else if (data.classList[0] == 'first__form__input'){
-            for (let i = 0; i < allRecipeData.length; i++){
-                let isIngredient = Array.from(allRecipeData[i].lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(data.value.toLowerCase()))
-                let isAppliance = allRecipeData[i].attributes[1].value.toLowerCase().includes(data.value.toLowerCase()) 
-                let isUstensil = allRecipeData[i].attributes[2].value.toLowerCase().includes(data.value.toLowerCase())
-                let isMethod = allRecipeMethod[i].innerHTML.toLowerCase().includes(data.value.toLowerCase())
-                if(isIngredient == false && isAppliance == false && isUstensil == false && isMethod == false){
-                    recipesSection.children[i].classList.replace('d-block', 'd-none')
-                } 
-            }  
-        } 
-    } else if (data.classList[0] == 'ingredient' || data.classList[0] == 'appliance' || data.classList[0] == 'ustensil'){
-        for (let i = 0; i < source.length; i++){
-            let isIngredient = Array.from(source[i].lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(data.innerHTML.toLowerCase()))
-            let isAppliance = source[i].attributes[1].value.toLowerCase().includes(data.innerHTML.toLowerCase()) 
-            let isUstensil = source[i].attributes[2].value.toLowerCase().includes(data.innerHTML.toLowerCase())
-            if(isIngredient == false && isAppliance == false && isUstensil == false){
-                recipesSection.children[i].classList.replace('d-block', 'd-none')
-            } else {
-                recipesSection.children[i].classList.replace('d-none', 'd-block')
-            }
-        } 
+        }
     } else {
-        for (let i = 0; i < recipesSection.children.length; i++){
-            recipesSection.children[i].classList.replace('d-none', 'd-block')
+        for (const child of recipesSection.children){
+            child.classList.replace('d-none', 'd-block')
         }
     }
-}*/
+}
