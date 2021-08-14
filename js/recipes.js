@@ -164,38 +164,71 @@ function deployInputsElements(data){
 
 
 // Add and Remove Selected items from inputs lists
-function selectElement(){
-    let newDiv = document.createElement('div')
-    selectedItems.appendChild(newDiv)
-    newDiv.classList.add("item")
-    newDiv.classList.add(`selected__items__${this.classList[0]}`)
-    newDiv.innerHTML = `${this.innerHTML} <i class="far fa-times-circle"></i>`
+function selectElement(data){
+    if(this.classList != undefined){
+        let newDiv = document.createElement('div')
+        selectedItems.appendChild(newDiv)
+        newDiv.classList.add("item")
+        newDiv.classList.add(`selected__items__${this.classList[0]}`)
+        newDiv.innerHTML = `${this.innerHTML} <i class="far fa-times-circle"></i>`
 
-    let cross = document.querySelectorAll('.fa-times-circle')
-    cross.forEach(element => element.addEventListener('click', removeElement))
+        let cross = document.querySelectorAll('.fa-times-circle')
+        cross.forEach(element => element.addEventListener('click', removeElement))
+    }
 
-    if(this.classList[0] == 'ingredient'){
-        for(let i = 0; i < allRecipeData.length; i++){
-            let isInclude = Array.from(allRecipeData[i].lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(this.innerHTML.toLowerCase()))
+    if(this.classList == undefined) {
+        console.log(data)
+        if(data.classList[1] == 'selected__items__ingredient'){
+            //console.log(data.innerText)
+            for(const recipe of allRecipeData){
+                let isInclude = Array.from(recipe.lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(data.innerText.toLowerCase()))
+                if(isInclude == false){
+                    recipe.classList.replace('d-block', 'd-none')
+                } else {
+                    recipe.classList.replace('d-none', 'd-block')
+                }
+            }
+        } else if(data.classList[1] == 'selected__items__appliance'){
+            for(const recipe of allRecipeData){
+                let isInclude = recipe.attributes[1].value.toLowerCase().includes(data.innerText.toLowerCase())
+                if(isInclude == false){
+                    recipe.classList.replace('d-block', 'd-none')
+                } else {
+                    recipe.classList.replace('d-none', 'd-block')
+                }
+            }
+        } else if(data.classList[1] == 'selected__items__ustensil'){
+            for(const recipe of allRecipeData){
+                let isInclude = recipe.attributes[2].value.toLowerCase().includes(data.innerText.toLowerCase())
+                if(isInclude == false){
+                    recipe.classList.replace('d-block', 'd-none')
+                } else {
+                    recipe.classList.replace('d-none', 'd-block')
+                }
+            }
+        } 
+    } else if(this.classList[0] == 'ingredient'){
+        for(const recipe of allRecipeData){
+            let isInclude = Array.from(recipe.lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(this.innerHTML.toLowerCase()))
             if(isInclude == false){
-                allRecipeData[i].classList.replace('d-block', 'd-none')
+                recipe.classList.replace('d-block', 'd-none')
             }
         }
     } else if(this.classList[0] == 'appliance'){
-        for(let i = 0; i < allRecipeData.length; i++){
-            let isInclude = allRecipeData[i].attributes[1].value.toLowerCase().includes(this.innerHTML.toLowerCase())
+        for(const recipe of allRecipeData){
+            let isInclude = recipe.attributes[1].value.toLowerCase().includes(this.innerHTML.toLowerCase())
             if(isInclude == false){
-                allRecipeData[i].classList.replace('d-block', 'd-none')
+                recipe.classList.replace('d-block', 'd-none')
             }
         }
     } else if(this.classList[0] == 'ustensil'){
-        for(let i = 0; i < allRecipeData.length; i++){
-            let isInclude = allRecipeData[i].attributes[2].value.toLowerCase().includes(this.innerHTML.toLowerCase())
+        for(const recipe of allRecipeData){
+            let isInclude = recipe.attributes[2].value.toLowerCase().includes(this.innerHTML.toLowerCase())
             if(isInclude == false){
-                allRecipeData[i].classList.replace('d-block', 'd-none')
+                recipe.classList.replace('d-block', 'd-none')
             }
         }
-    }
+    } 
     filterItems()
 }
 
@@ -212,8 +245,16 @@ function filterItems(){
 
 function removeElement(){
     this.parentElement.remove()
-    for (const child of recipesSection.children){
-        child.classList.replace('d-none', 'd-block')
+    if(selectedItems.children.length == 1){
+        selectElement(selectedItems.children[0])
+    } else if(selectedItems.children.length == 2){
+        selectElement(selectedItems.children[0])
+        selectElement(selectedItems.children[1])
+    } else {
+        for (const child of recipesSection.children){
+            child.classList.replace('d-none', 'd-block')
+        }
+        filterItems()
     }
 }
 
@@ -231,7 +272,7 @@ function searchItem(){
         let thisArray = Array.from(everyUstensils).filter(element => element.innerHTML.toLowerCase().includes(this.value.toLowerCase()))
         Array.from(newUstensilsUl.children).forEach(element => element.remove())
         thisArray.forEach(element => newUstensilsUl.appendChild(element))
-    } else if (this.classList[0] == 'first__form__input'){
+    } /*else if (this.classList[0] == 'first__form__input'){
         let thisIngredientArray = Array.from(everyIngredients).filter(element => element.innerHTML.toLowerCase().includes(this.value.toLowerCase()))
         Array.from(newIngredientUl.children).forEach(element => element.remove())
         thisIngredientArray.forEach(element => newIngredientUl.appendChild(element))
@@ -241,11 +282,11 @@ function searchItem(){
         let thisUstensilsArray = Array.from(everyUstensils).filter(element => element.innerHTML.toLowerCase().includes(this.value.toLowerCase()))
         Array.from(newUstensilsUl.children).forEach(element => element.remove())
         thisUstensilsArray.forEach(element => newUstensilsUl.appendChild(element))
-    }
+    }*/
 }
 
 // search recipe from ingredients/appliance/ustensils
-function searchRecipe(data, source){
+/*function searchRecipe(data, source){
     let allRecipeMethod = document.querySelectorAll('.recipe__howto')
     if(data.value.length >= 3){
         if(data.classList[1] == 'input__search__primary'){
@@ -304,4 +345,4 @@ function searchRecipe(data, source){
             recipesSection.children[i].classList.replace('d-none', 'd-block')
         }
     }
-}
+}*/
