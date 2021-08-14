@@ -179,7 +179,7 @@ function selectElement(data){
     if(this.classList == undefined) {
         if(data.classList[1] == 'selected__items__ingredient'){
             for(const recipe of allRecipeData){
-                let isInclude = Array.from(recipe.lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(data.innerText.toLowerCase()))
+                let isInclude = Array.from(recipe.lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(data.innerText.trim().toLowerCase()))
                 if(isInclude == false){
                     recipe.classList.replace('d-block', 'd-none')
                 } 
