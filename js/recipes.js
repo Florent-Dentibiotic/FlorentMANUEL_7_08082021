@@ -252,7 +252,6 @@ function selectElement(source){
     }
 
     if(this.classList == undefined) {
-        console.log(source)
         if(source.classList[1] == 'selected__items__ingredient'){
             for(const recipe of allRecipeData){
                 let isInclude = Array.from(recipe.lastElementChild.children[2].children).some(element => element.innerHTML.toLowerCase().includes(source.innerText.trim().toLowerCase()))
@@ -355,7 +354,8 @@ function searchRecipe(){
             let appliancesIncluded = recipe.attributes[1].value.toLowerCase().includes(this.value.toLowerCase())
             let ustensilsIncluded = recipe.attributes[2].value.toLowerCase().includes(this.value.toLowerCase())
             let methodIncluded = recipe.children[1].lastElementChild.innerHTML.toLowerCase().includes(this.value.toLowerCase())
-            if(ingredientsIncluded == false && appliancesIncluded == false && ustensilsIncluded == false && methodIncluded == false){
+            let titleIncluded = recipe.lastElementChild.firstChild.innerText.toLowerCase().includes(this.value.toLowerCase())
+            if(ingredientsIncluded == false && appliancesIncluded == false && ustensilsIncluded == false && methodIncluded == false && titleIncluded == false){
                 recipe.classList.replace('d-block', 'd-none')
                 filterItems()
             } else{
