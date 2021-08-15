@@ -1,123 +1,31 @@
 const myRequest = new Request('recipes.json')
 const recipesSection = document.querySelector('.recipes')
-const ingredientsMenu = document.querySelector('.ingredients__menu')
-const applianceMenu = document.querySelector('.appliance__menu')
-const ustensilsMenu = document.querySelector('.ustensils__menu')
+const ingredientsMenu = document.querySelector('ul.ingredients__menu')
+const applianceMenu = document.querySelector('ul.appliance__menu')
+const ustensilsMenu = document.querySelector('ul.ustensils__menu')
 const btnSearchNodes = document.querySelectorAll('.btn__group__search')
 const btnSearch = Array.from(btnSearchNodes)
 const firstInputSearch = document.querySelector('.first__form__input')
 const inputsSearchNodes = document.querySelectorAll('.input__search')
-const inputsSearch = Array.from(inputsSearchNodes)
+const closeCross = document.querySelectorAll('.fa-chevron-down')
 const chevronUp = document.querySelectorAll('.fa-chevron-up')
 const selectedItems = document.querySelector('.selected__items')
 let allRecipes = {}
-let allRecipeData = []
-let everyIngredients = {}
-let everyAppliances = {}
-let everyUstensils = {}
-
-// EventListener for displaying search inputs
-btnSearch.forEach(element => element.addEventListener('focusin', openSearchInput))
-chevronUp.forEach(element => element.addEventListener('click', closeSearchInput))
-inputsSearch.forEach(element => element.addEventListener('keyup', searchItem))
-firstInputSearch.addEventListener('keyup', searchRecipe)
-
-function openSearchInput(){
-    let btnActive = btnSearch.filter(element => element.firstElementChild.classList[2] == 'd-none')
-    if (btnActive.length > 0){
-        btnActive[0].firstElementChild.nextElementSibling.classList.replace('d-block', 'd-none')
-        btnActive[0].firstElementChild.classList.replace('d-none', 'd-block')
-        btnActive[0].lastElementChild.classList.replace('d-block', 'd-none')
-    }
-    this.firstElementChild.nextElementSibling.classList.replace('d-none', 'd-block')
-    this.firstElementChild.classList.replace('d-block', 'd-none')
-    this.lastElementChild.classList.replace('d-none', 'd-block')
-    this.firstElementChild.nextElementSibling.firstElementChild.focus()
-}
-
-function closeSearchInput(){
-    this.parentElement.classList.replace('d-block', 'd-none')
-    this.parentElement.parentElement.firstElementChild.classList.replace('d-none', 'd-block')
-    this.parentElement.parentElement.lastElementChild.classList.replace('d-block', 'd-none')
-    this.parentElement.firstElementChild.value = ""
-}
-
-function adjustInputLenght(){
-    let ingredientsVisible = document.querySelectorAll('.ingredient')
-    let appliancesVisible = document.querySelectorAll('.appliance')
-    let ustensilsVisible = document.querySelectorAll('.ustensil')
-    if(ingredientsVisible.length <= 1){
-        btnSearch[0].lastElementChild.style.width = "170px";
-        btnSearch[0].lastElementChild.previousElementSibling.style.width = "170px";
-        btnSearch[0].lastElementChild.previousElementSibling.firstElementChild.style.width = "150px";
-        btnSearch[0].lastElementChild.previousElementSibling.firstElementChild.placeholder = "..."
-    } else if (ingredientsVisible.length == 2){
-        btnSearch[0].lastElementChild.style.width = "470px";
-        btnSearch[0].lastElementChild.previousElementSibling.style.width = "470px";
-        btnSearch[0].lastElementChild.previousElementSibling.firstElementChild.style.width = "450px";
-        btnSearch[0].lastElementChild.previousElementSibling.firstElementChild.placeholder = "Rechercher un ingredient"
-    } else if (ingredientsVisible.length > 2){
-        btnSearch[0].lastElementChild.style.width = "690px";
-        btnSearch[0].lastElementChild.previousElementSibling.style.width = "690px";
-        btnSearch[0].lastElementChild.previousElementSibling.firstElementChild.style.width = "670px";
-    }
-    if(appliancesVisible.length <= 1){
-        btnSearch[1].lastElementChild.style.width = "170px";
-        btnSearch[1].lastElementChild.previousElementSibling.style.width = "170px";
-        btnSearch[1].lastElementChild.previousElementSibling.firstElementChild.style.width = "150px";
-        btnSearch[1].lastElementChild.previousElementSibling.firstElementChild.placeholder = "..."
-    } else if (appliancesVisible.length == 2){
-        btnSearch[1].lastElementChild.style.width = "470px";
-        btnSearch[1].lastElementChild.previousElementSibling.style.width = "470px";
-        btnSearch[1].lastElementChild.previousElementSibling.firstElementChild.style.width = "450px";
-        btnSearch[1].lastElementChild.previousElementSibling.firstElementChild.placeholder = "Rechercher un appareil"
-    } else if (appliancesVisible.length > 2){
-        btnSearch[1].lastElementChild.style.width = "690px";
-        btnSearch[1].lastElementChild.previousElementSibling.style.width = "690px";
-        btnSearch[1].lastElementChild.previousElementSibling.firstElementChild.style.width = "670px";
-    }
-    if(ustensilsVisible.length <= 1){
-        btnSearch[2].lastElementChild.style.width = "170px";
-        btnSearch[2].lastElementChild.previousElementSibling.style.width = "170px";
-        btnSearch[2].lastElementChild.previousElementSibling.firstElementChild.style.width = "150px";
-        btnSearch[2].lastElementChild.previousElementSibling.firstElementChild.placeholder = "..."
-    } else if (ustensilsVisible.length == 2){
-        btnSearch[2].lastElementChild.style.width = "470px";
-        btnSearch[2].lastElementChild.previousElementSibling.style.width = "470px";
-        btnSearch[2].lastElementChild.previousElementSibling.firstElementChild.style.width = "450px";
-        btnSearch[2].lastElementChild.previousElementSibling.firstElementChild.placeholder = "Rechercher un ustensil"
-    } else if (ustensilsVisible.length > 2){
-        btnSearch[2].lastElementChild.style.width = "690px";
-        btnSearch[2].lastElementChild.previousElementSibling.style.width = "690px";
-        btnSearch[2].lastElementChild.previousElementSibling.firstElementChild.style.width = "670px";
-    }
-}
-
-// Ul creation for Ingredients/Appliance/Ustensils
-let newIngredientUl = document.createElement('ul')
-ingredientsMenu.appendChild(newIngredientUl)
 let newIngredientsArray = []
-
-let newApplianceUl = document.createElement('ul')
-applianceMenu.appendChild(newApplianceUl)
 let newApplianceArray = []
-
-let newUstensilsUl = document.createElement('ul')
-ustensilsMenu.appendChild(newUstensilsUl)
 let newUstensilsArray = []
 
 // JSON extraction
 fetch(myRequest)
 .then(response => response.json())
 .then(function extractRecipes(data){
-    allRecipes = data
-    deployJSON(data)
-    deployInputsElements(data.recipes)
+    allRecipes = data.recipes
+    deployJSON(data.recipes)
     }
     );
 
 function deployJSON(data){
-    for (let i = 0; i < data.recipes.length; i++){
+    for (const recipe of data){
         // Adding all recipies to recipes section
             // first line of the recipe
         let newRecipe = document.createElement('div')
@@ -132,16 +40,16 @@ function deployJSON(data){
         newRecipeDetails.classList.add('recipe__details')
         let newH2 = document.createElement('h2')
         newRecipeDetails.appendChild(newH2)
-        newH2.textContent = data.recipes[i].name
+        newH2.textContent = recipe.name
         let newH3 = document.createElement('h3')
         newRecipeDetails.appendChild(newH3)
-        newH3.innerHTML = `<i class="far fa-clock"></i> ${data.recipes[i].time} min`
+        newH3.innerHTML = `<i class="far fa-clock"></i> ${recipe.time} min`
 
             // list of ingredients + recipe
         let newUl = document.createElement('ul')
         newRecipeDetails.appendChild(newUl)
         newUl.classList.add('recipe__ingredient')
-        let allIngredients = data.recipes[i].ingredients
+        let allIngredients = recipe.ingredients
         allIngredients.forEach(element => {
             let newLi = document.createElement('li')
             newUl.appendChild(newLi)
@@ -155,18 +63,57 @@ function deployJSON(data){
         });
         let newP = document.createElement('p')
         newRecipeDetails.appendChild(newP)
-        newP.textContent = data.recipes[i].description
+        newP.textContent = recipe.description
         newP.classList.add('recipe__howto')
             // adding data attributes for appliance & ustensils
-        let allUstensils = data.recipes[i].ustensils
-        newRecipe.setAttribute('data-appliance', data.recipes[i].appliance)
+        let allUstensils = recipe.ustensils
+        newRecipe.setAttribute('data-appliance', recipe.appliance)
         newRecipe.setAttribute('data-ustensils', allUstensils)
 
-        allRecipeData = Array.from(document.querySelectorAll('.recipe'))
+        for(const ingredient of allIngredients){
+            if(! newIngredientsArray.includes(ingredient.ingredient)){
+                newIngredientsArray.push(ingredient.ingredient)
+                let newLi = document.createElement('li')
+                newLi.classList.add('ingredient')
+                ingredientsMenu.appendChild(newLi)
+                newLi.textContent = ingredient.ingredient
+            }
+        }
+        if(! newApplianceArray.includes(recipe.appliance)){
+            newApplianceArray.push(recipe.appliance)
+            let newLi = document.createElement('li')
+            newLi.classList.add('appliance')
+            applianceMenu.appendChild(newLi)
+            newLi.textContent = recipe.appliance
+        }
+        for(const ustensil of allUstensils){
+            if(! newUstensilsArray.includes(ustensil)){
+                newUstensilsArray.push(ustensil)
+                let newLi = document.createElement('li')
+                newLi.classList.add('ustensil')
+                ustensilsMenu.appendChild(newLi)
+                newLi.textContent = ustensil
+            }
+        }
     } 
 }
 
-function deployInputsElements(data){
+btnSearchNodes.forEach(element => element.addEventListener('focusin', openSearchInput))
+//btnSearchNodes.forEach(element => element.addEventListener('click', closeSearchInput))
+
+
+function openSearchInput(){
+    this.firstElementChild.classList.replace('d-block', 'd-none')
+    this.lastElementChild.classList.replace('d-none', 'd-block')
+    this.lastElementChild.firstElementChild.focus()
+}
+
+function closeSearchInput(){
+    console.log(this.parentElement.previousElementSibling)
+    /*this.parentElement.previousElementSibling.classList.replace('d-none', 'd-block')
+    this.parentElement.classList.replace('d-block', 'd-none')*/
+}
+/*function deployInputsElements(data){
     if(everyIngredients != {} && data.length < 50 ){
         Array.from(newIngredientUl.children).forEach(element => element.remove())
         Array.from(newApplianceUl.children).forEach(element => element.remove())
@@ -377,4 +324,4 @@ function searchRecipe(){
             filterItems()
         }
     }
-}
+}*/

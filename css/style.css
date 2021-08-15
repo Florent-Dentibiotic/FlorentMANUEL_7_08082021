@@ -65,6 +65,7 @@ p {
   padding-left: 1em;
   position: relative;
   outline: none;
+  text-overflow: ellipsis;
 }
 .input__search__primary {
   background-color: #3282F7;
@@ -130,8 +131,7 @@ p {
   position: absolute;
   top: 65px;
   overflow: hidden;
-}
-.ingredients__menu ul, .appliance__menu ul, .ustensils__menu ul {
+  width: 690px;
   margin-top: -5px;
   list-style: none;
   padding: 0;
