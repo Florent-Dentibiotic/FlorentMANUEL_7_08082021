@@ -131,15 +131,14 @@ p {
   position: absolute;
   top: 65px;
   overflow: hidden;
-  width: 690px;
   margin-top: -5px;
   list-style: none;
   padding: 0;
   color: #fff;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(222px, auto));
-  max-width: 666px;
-  max-height: 328px;
+  width: 666px;
+  max-height: 340px;
   font-size: 18px;
   padding: 12px;
 }

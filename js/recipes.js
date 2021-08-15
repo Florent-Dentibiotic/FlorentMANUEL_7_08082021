@@ -102,13 +102,17 @@ chevronUp.forEach(element => element.addEventListener('click', closeSearchInput)
 
 
 function openSearchInput(){
+    let btnActive = btnSearch.filter(element => element.firstElementChild.classList[2] == 'd-none')
+    if (btnActive.length > 0){
+        btnActive[0].firstElementChild.classList.replace('d-none', 'd-block')
+        btnActive[0].lastElementChild.classList.replace('d-block', 'd-none')
+    }
     this.firstElementChild.classList.replace('d-block', 'd-none')
     this.lastElementChild.classList.replace('d-none', 'd-block')
     this.lastElementChild.firstElementChild.focus()
 }
 
 function closeSearchInput(){
-    console.log(this.parentElement.previousElementSibling)
     this.parentElement.previousElementSibling.classList.replace('d-none', 'd-block')
     this.parentElement.classList.replace('d-block', 'd-none')
 }
