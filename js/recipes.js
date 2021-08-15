@@ -7,7 +7,6 @@ const btnSearchNodes = document.querySelectorAll('.btn__group__search')
 const btnSearch = Array.from(btnSearchNodes)
 const firstInputSearch = document.querySelector('.first__form__input')
 const inputsSearchNodes = document.querySelectorAll('.input__search')
-const closeCross = document.querySelectorAll('.fa-chevron-down')
 const chevronUp = document.querySelectorAll('.fa-chevron-up')
 const selectedItems = document.querySelector('.selected__items')
 let allRecipes = {}
@@ -99,7 +98,7 @@ function deployJSON(data){
 }
 
 btnSearchNodes.forEach(element => element.addEventListener('focusin', openSearchInput))
-//btnSearchNodes.forEach(element => element.addEventListener('click', closeSearchInput))
+chevronUp.forEach(element => element.addEventListener('click', closeSearchInput))
 
 
 function openSearchInput(){
@@ -110,8 +109,8 @@ function openSearchInput(){
 
 function closeSearchInput(){
     console.log(this.parentElement.previousElementSibling)
-    /*this.parentElement.previousElementSibling.classList.replace('d-none', 'd-block')
-    this.parentElement.classList.replace('d-block', 'd-none')*/
+    this.parentElement.previousElementSibling.classList.replace('d-none', 'd-block')
+    this.parentElement.classList.replace('d-block', 'd-none')
 }
 /*function deployInputsElements(data){
     if(everyIngredients != {} && data.length < 50 ){
