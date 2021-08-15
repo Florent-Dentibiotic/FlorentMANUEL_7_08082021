@@ -55,7 +55,7 @@ p {
 }
 
 .input__search {
-  min-width: 670px;
+  width: 670px;
   height: 69px;
   font-size: 18px;
   color: #fff;
