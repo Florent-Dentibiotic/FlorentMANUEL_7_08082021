@@ -22,6 +22,7 @@
     li{
         padding: 5px;
         cursor: pointer;
+        text-transform: capitalize;
         &:hover{
             color: $grey;
         }

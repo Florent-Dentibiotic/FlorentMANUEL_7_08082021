@@ -24,6 +24,7 @@ fetch(myRequest)
     );
 
 function deployJSON(data){
+    data.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
     for (const recipe of data){
         // Adding all recipies to recipes section
             // first line of the recipe
@@ -72,29 +73,38 @@ function deployJSON(data){
         for(const ingredient of allIngredients){
             if(! newIngredientsArray.includes(ingredient.ingredient)){
                 newIngredientsArray.push(ingredient.ingredient)
-                let newLi = document.createElement('li')
-                newLi.classList.add('ingredient')
-                ingredientsMenu.appendChild(newLi)
-                newLi.textContent = ingredient.ingredient
             }
         }
         if(! newApplianceArray.includes(recipe.appliance)){
             newApplianceArray.push(recipe.appliance)
-            let newLi = document.createElement('li')
-            newLi.classList.add('appliance')
-            applianceMenu.appendChild(newLi)
-            newLi.textContent = recipe.appliance
         }
         for(const ustensil of allUstensils){
             if(! newUstensilsArray.includes(ustensil)){
                 newUstensilsArray.push(ustensil)
-                let newLi = document.createElement('li')
-                newLi.classList.add('ustensil')
-                ustensilsMenu.appendChild(newLi)
-                newLi.textContent = ustensil
             }
         }
     } 
+    newIngredientsArray.sort()
+    newApplianceArray.sort()
+    newUstensilsArray.sort()
+    for (const ingredient of newIngredientsArray){
+        let newLi = document.createElement('li')
+        newLi.classList.add('ingredient')
+        ingredientsMenu.appendChild(newLi)
+        newLi.textContent = ingredient 
+    }
+    for (const appliance of newApplianceArray){
+        let newLi = document.createElement('li')
+        newLi.classList.add('appliance')
+        applianceMenu.appendChild(newLi)
+        newLi.textContent = appliance
+    }
+    for (const ustensil of newUstensilsArray){
+        let newLi = document.createElement('li')
+        newLi.classList.add('ustensil')
+        ustensilsMenu.appendChild(newLi)
+        newLi.textContent = ustensil
+    }
 }
 
 btnSearchNodes.forEach(element => element.addEventListener('focusin', openSearchInput))
