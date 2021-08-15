@@ -146,6 +146,7 @@ p {
 .ingredients__menu li, .appliance__menu li, .ustensils__menu li {
   padding: 5px;
   cursor: pointer;
+  text-transform: capitalize;
 }
 .ingredients__menu li:hover, .appliance__menu li:hover, .ustensils__menu li:hover {
   color: #C7BEBE;
