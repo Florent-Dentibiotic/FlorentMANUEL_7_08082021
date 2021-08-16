@@ -23,6 +23,11 @@ fetch(myRequest)
     }
     );
 
+// Event listener
+    // to open and close search inputs 
+btnSearchNodes.forEach(element => element.addEventListener('focusin', openSearchInput))
+chevronUp.forEach(element => element.addEventListener('click', closeSearchInput))
+
 function deployJSON(data){
     data.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
     for (const recipe of data){
@@ -105,11 +110,20 @@ function deployJSON(data){
         ustensilsMenu.appendChild(newLi)
         newLi.textContent = ustensil
     }
+
+    ingredientsMenu.childNodes.forEach(element => element.addEventListener('click', function(){
+        selectingItems (element);
+    }))
+    applianceMenu.childNodes.forEach(element => element.addEventListener('click', selectingItems))
+    ustensilsMenu.childNodes.forEach(element => element.addEventListener('click', selectingItems))
+
+    /*const ingredientsDisponible = document.querySelectorAll('.ingredient')
+    const applianceDisponible = document.querySelectorAll('.appliance')
+    const ustensilDisponible = document.querySelectorAll('.ustensil')
+    ingredientsDisponible.forEach(element => element.addEventListener('click', selectingItems))
+    applianceDisponible.forEach(element => element.addEventListener('click', selectingItems))
+    ustensilDisponible.forEach(element => element.addEventListener('click', selectingItems))*/
 }
-
-btnSearchNodes.forEach(element => element.addEventListener('focusin', openSearchInput))
-chevronUp.forEach(element => element.addEventListener('click', closeSearchInput))
-
 
 function openSearchInput(){
     let btnActive = btnSearch.filter(element => element.firstElementChild.classList[2] == 'd-none')
@@ -125,6 +139,10 @@ function openSearchInput(){
 function closeSearchInput(){
     this.parentElement.previousElementSibling.classList.replace('d-none', 'd-block')
     this.parentElement.classList.replace('d-block', 'd-none')
+}
+
+function selectingItems(infos){
+    console.log(infos)
 }
 /*function deployInputsElements(data){
     if(everyIngredients != {} && data.length < 50 ){
