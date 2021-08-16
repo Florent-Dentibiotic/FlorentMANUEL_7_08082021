@@ -10,9 +10,6 @@ const inputsSearchNodes = document.querySelectorAll('.input__search')
 const chevronUp = document.querySelectorAll('.fa-chevron-up')
 const selectedItems = document.querySelector('.selected__items')
 let allRecipes = {}
-let newIngredientsArray = []
-let newApplianceArray = []
-let newUstensilsArray = []
 
 // JSON extraction
 fetch(myRequest)
@@ -27,10 +24,17 @@ fetch(myRequest)
     // to open and close search inputs 
 btnSearchNodes.forEach(element => element.addEventListener('focusin', openSearchInput))
 chevronUp.forEach(element => element.addEventListener('click', closeSearchInput))
-inputsSearchNodes.forEach(element => element.addEventListener('keyup', searchRecipe))
-firstInputSearch.addEventListener('keyup', searchRecipe)
+inputsSearchNodes.forEach(element => element.addEventListener('keyup', function(){
+    filterItems(this)   
+}))
+firstInputSearch.addEventListener('keyup', function(){
+    searchRecipe(this.value)   
+})
 
 function deployJSON(data){
+    let newIngredientsArray = []
+    let newApplianceArray = []
+    let newUstensilsArray = []
     data.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
     for (const recipe of data){
         // Adding all recipies to recipes section
@@ -126,13 +130,6 @@ function deployJSON(data){
     ustensilsMenu.childNodes.forEach(element => element.addEventListener('click', function(){
         selectingItems (element);
     }))
-
-    /*const ingredientsDisponible = document.querySelectorAll('.ingredient')
-    const applianceDisponible = document.querySelectorAll('.appliance')
-    const ustensilDisponible = document.querySelectorAll('.ustensil')
-    ingredientsDisponible.forEach(element => element.addEventListener('click', selectingItems))
-    applianceDisponible.forEach(element => element.addEventListener('click', selectingItems))
-    ustensilDisponible.forEach(element => element.addEventListener('click', selectingItems))*/
 }
 
 function openSearchInput(){
@@ -192,9 +189,9 @@ function filterItems(inputOrigin){
         const everyItems = inputOrigin.nextElementSibling.nextElementSibling.childNodes
         if(inputOrigin.value.length > 3){
             for(const item of everyItems){
-                if(!item.innerText.includes(inputOrigin.value)){
+                if(!item.innerText.toLowerCase().includes(inputOrigin.value.toLowerCase())){
                     item.classList.replace('d-block','d-none')
-                }else if(item.innerText.includes(inputOrigin.value)){
+                }else if(item.innerText.toLowerCase().includes(inputOrigin.value.toLowerCase())){
                     item.classList.replace('d-none','d-block')
                 }
             }
@@ -211,20 +208,26 @@ function filterItems(inputOrigin){
     }
 }
 
-function searchRecipe(){
-    if(this.value.length > 3){
+function searchRecipe(typedStrings){
+    if(typedStrings.length > 3){
         recipeSelected = []
         for(const recipe of allRecipes){
-            let inName = recipe.name.toLowerCase().includes(this.value.toLowerCase())
-            let inDescription = recipe.description.toLowerCase().includes(this.value.toLowerCase())
-            let inAppliance = recipe.appliance.toLowerCase().includes(this.value.toLowerCase())
-            let inUstensils = recipe.ustensils.some(element => element.toLowerCase() == this.value.toLowerCase())
-            let inIngredients = recipe.ingredients.some(element => element.ingredient.toLowerCase() == this.value.toLowerCase())
+            let inName = recipe.name.toLowerCase().includes(typedStrings.toLowerCase())
+            let inDescription = recipe.description.toLowerCase().includes(typedStrings.toLowerCase())
+            let inAppliance = recipe.appliance.toLowerCase().includes(typedStrings.toLowerCase())
+            let inUstensils = recipe.ustensils.some(element => element.toLowerCase().includes(typedStrings.toLowerCase()))
+            let inIngredients = recipe.ingredients.some(element => element.ingredient.toLowerCase().includes(typedStrings.toLowerCase()))
             if(inName == true || inDescription == true || inAppliance == true || inUstensils == true || inIngredients == true){
                 recipeSelected.push(recipe)
             }
         }
         const recipes = document.querySelectorAll('.recipe')
+        const ulIngredients = Array.from(ingredientsMenu.children)
+        const ulAppliances = Array.from(applianceMenu.children)
+        const ulUstensils = Array.from(ustensilsMenu.children)
+        ulIngredients.forEach(element => element.remove())
+        ulAppliances.forEach(element => element.remove())
+        ulUstensils.forEach(element => element.remove())
         recipes.forEach(element => element.remove())
         deployJSON(recipeSelected)
     } else {
