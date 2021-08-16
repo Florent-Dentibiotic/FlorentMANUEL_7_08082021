@@ -220,7 +220,7 @@ function searchRecipe(){
             let inAppliance = recipe.appliance.toLowerCase().includes(this.value.toLowerCase())
             let inUstensils = recipe.ustensils.some(element => element.toLowerCase() == this.value.toLowerCase())
             let inIngredients = recipe.ingredients.some(element => element.ingredient.toLowerCase() == this.value.toLowerCase())
-            if(inName != false || inDescription != false || inAppliance != false || inUstensils != false || inIngredients != false){
+            if(inName == true || inDescription == true || inAppliance == true || inUstensils == true || inIngredients == true){
                 recipeSelected.push(recipe)
             }
         }
