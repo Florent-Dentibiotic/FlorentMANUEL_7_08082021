@@ -190,8 +190,26 @@ function removeElement(){
 }
 
 function searchRecipe(typedStrings){
-    if(typedStrings.length > 3){
-        recipeSelected = []
+    const visibleRecipe = document.querySelectorAll('.recipe')
+    let activeRecipe = []
+    let recipeSelected = []
+    for(const recipe of visibleRecipe){
+        let visible = allRecipes.findIndex(element => element.name == recipe.lastChild.firstChild.innerText)
+        activeRecipe.push(allRecipes[visible])
+    }
+    console.log(activeRecipe)
+
+    if(typedStrings.length <= 3 && selectedItems.children.length == 0){
+        const recipes = document.querySelectorAll('.recipe')
+        const ulIngredients = Array.from(ingredientsMenu.children)
+        const ulAppliances = Array.from(applianceMenu.children)
+        const ulUstensils = Array.from(ustensilsMenu.children)
+        ulIngredients.forEach(element => element.remove())
+        ulAppliances.forEach(element => element.remove())
+        ulUstensils.forEach(element => element.remove())
+        recipes.forEach(element => element.remove())
+        deployJSON(allRecipes)
+    } else if(typedStrings.length > 3 && selectedItems.children.length == 0){
         for(const recipe of allRecipes){
             let inName = recipe.name.toUpperCase().includes(typedStrings.toUpperCase())
             let inDescription = recipe.description.toUpperCase().includes(typedStrings.toUpperCase())
@@ -211,7 +229,32 @@ function searchRecipe(typedStrings){
         ulUstensils.forEach(element => element.remove())
         recipes.forEach(element => element.remove())
         deployJSON(recipeSelected)
-    } else {
+    } else if(typedStrings.length <= 3 && selectedItems.children.length > 0){
+        let allSelectedItems = Array.from(selectedItems.children)
+        for(item of allSelectedItems){
+            if(item.classList[1] == "selected__items__ingredient"){
+                for(const recipe of allRecipes){
+                    let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(item.innerText.toUpperCase()))
+                    if(inIngredients == true){
+                        recipeSelected.push(recipe)
+                    }
+                }
+            } else if(item.classList[1] == "selected__items__appliance"){
+                for(const recipe of allRecipes){
+                    let inAppliance = recipe.appliance.toUpperCase().includes(item.innerText.toUpperCase())
+                    if(inAppliance == true){
+                        recipeSelected.push(recipe)
+                    }
+                }
+            } else {
+                for(const recipe of allRecipes){
+                    let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(typedStrings.toUpperCase()))
+                    if(inUstensils == true){
+                        recipeSelected.push(recipe)
+                    }
+                }
+            }
+        }
         const recipes = document.querySelectorAll('.recipe')
         const ulIngredients = Array.from(ingredientsMenu.children)
         const ulAppliances = Array.from(applianceMenu.children)
@@ -220,7 +263,32 @@ function searchRecipe(typedStrings){
         ulAppliances.forEach(element => element.remove())
         ulUstensils.forEach(element => element.remove())
         recipes.forEach(element => element.remove())
-        deployJSON(allRecipes)
+        deployJSON(recipeSelected)
+    } else {
+        let allSelectedItems = Array.from(selectedItems.children)
+        let filteredRecipes = []
+        for(item of allSelectedItems){
+            /******* */ /*CORRIGER ICI */
+        }
+        for(const recipe of recipeSelected){
+            let inName = recipe.name.toUpperCase().includes(typedStrings.toUpperCase())
+            let inDescription = recipe.description.toUpperCase().includes(typedStrings.toUpperCase())
+            let inAppliance = recipe.appliance.toUpperCase().includes(typedStrings.toUpperCase())
+            let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(typedStrings.toUpperCase()))
+            let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(typedStrings.toUpperCase()))
+            if(inName == true || inDescription == true || inAppliance == true || inUstensils == true || inIngredients == true){
+                filteredRecipes.push(recipe)
+            }
+        }
+        const recipes = document.querySelectorAll('.recipe')
+        const ulIngredients = Array.from(ingredientsMenu.children)
+        const ulAppliances = Array.from(applianceMenu.children)
+        const ulUstensils = Array.from(ustensilsMenu.children)
+        ulIngredients.forEach(element => element.remove())
+        ulAppliances.forEach(element => element.remove())
+        ulUstensils.forEach(element => element.remove())
+        recipes.forEach(element => element.remove())
+        deployJSON(filteredRecipes)
     }
 }
 
