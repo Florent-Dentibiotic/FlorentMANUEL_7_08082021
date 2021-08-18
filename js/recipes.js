@@ -138,6 +138,8 @@ function openSearchInput(){
     if (btnActive.length > 0){
         btnActive[0].firstElementChild.classList.replace('d-none', 'd-block')
         btnActive[0].lastElementChild.classList.replace('d-block', 'd-none')
+        btnActive[0].lastElementChild.firstElementChild.value = ""
+        searchRecipe("")
     }
     this.firstElementChild.classList.replace('d-block', 'd-none')
     this.lastElementChild.classList.replace('d-none', 'd-block')
@@ -151,6 +153,14 @@ function closeSearchInput(){
 }
 
 function selectingItems(infos){
+    // search recipes and filter items from actuals recipes 
+    searchRecipe(infos.innerText)
+
+    // hide item in its list
+    let allItems = document.querySelectorAll('.btn__group li')
+    let thisItem = Array.from(allItems).find(element => element.innerText.toUpperCase() == infos.innerText.toUpperCase())
+    thisItem.classList.replace('d-block','d-none')
+
     // creating item in selectedSection
     let newDiv = document.createElement('div')
     selectedItems.appendChild(newDiv)
@@ -161,28 +171,20 @@ function selectingItems(infos){
     let cross = document.querySelectorAll('.fa-times-circle')
     cross.forEach(element => element.addEventListener('click', removeElement))
 
-    // hide item in its list
-    let allItems = document.querySelectorAll('.btn__group li')
-    let thisItem = Array.from(allItems).find(element => element.innerText.toUpperCase() == infos.innerText.toUpperCase())
-    thisItem.classList.replace('d-block','d-none')
-
     // inputs value = ""
     infos.parentElement.previousElementSibling.previousElementSibling.value = ""
     
-    // search recipes and filter items from actuals recipes 
-    searchRecipe(infos.innerText)
     //filterItems(infos.parentElement.previousElementSibling.previousElementSibling)
 
 }
 
 function removeElement(){
     this.parentElement.remove()
-
-    searchRecipe("a")
+    searchRecipe("")
 
 }
 
-// corriger situation :: selectedItem.length > 0
+// corriger situation :: selectedItem.length > 0 !!!
 function searchRecipe(typedStrings){
     let recipeSelected = []
 
@@ -305,8 +307,6 @@ function searchRecipe(typedStrings){
         recipes.forEach(element => element.remove())
         deployJSON(filteredRecipes)
     }
-    console.log(allRecipes)
-    console.log(filteredRecipes)
 }
 
 // revoir le filter items
