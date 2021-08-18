@@ -172,7 +172,7 @@ function selectingItems(infos){
     cross.forEach(element => element.addEventListener('click', removeElement))
 
     // inputs value = ""
-    infos.parentElement.previousElementSibling.previousElementSibling.value = ""
+    inputsSearchNodes.forEach(element => element.value = "")
     
     //filterItems(infos.parentElement.previousElementSibling.previousElementSibling)
 
@@ -188,7 +188,8 @@ function removeElement(){
 function searchRecipe(typedStrings){
     let recipeSelected = []
 
-    if(typedStrings.length <= 3 && selectedItems.children.length == 0){
+    if(typedStrings.length <= 2 && selectedItems.children.length == 0){
+        console.log('a')
         const recipes = document.querySelectorAll('.recipe')
         const ulIngredients = Array.from(ingredientsMenu.children)
         const ulAppliances = Array.from(applianceMenu.children)
@@ -198,7 +199,9 @@ function searchRecipe(typedStrings){
         ulUstensils.forEach(element => element.remove())
         recipes.forEach(element => element.remove())
         deployJSON(allRecipes)
-    } else if(typedStrings.length > 3 && selectedItems.children.length == 0){
+    } else if(typedStrings.length > 2 && selectedItems.children.length == 0){
+        console.log('b')
+        filteredRecipes = allRecipes.map(element => element)
         for(const recipe of allRecipes){
             let inName = recipe.name.toUpperCase().includes(typedStrings.toUpperCase())
             let inDescription = recipe.description.toUpperCase().includes(typedStrings.toUpperCase())
@@ -207,6 +210,9 @@ function searchRecipe(typedStrings){
             let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(typedStrings.toUpperCase()))
             if(inName == true || inDescription == true || inAppliance == true || inUstensils == true || inIngredients == true){
                 recipeSelected.push(recipe)
+            } else {
+                let index = filteredRecipes.findIndex(element => element == recipe)
+                filteredRecipes.splice(index, 1)
             }
         }
         const recipes = document.querySelectorAll('.recipe')
@@ -218,31 +224,33 @@ function searchRecipe(typedStrings){
         ulUstensils.forEach(element => element.remove())
         recipes.forEach(element => element.remove())
         deployJSON(recipeSelected)
-    } else if(typedStrings.length <= 3 && selectedItems.children.length > 0){
+    } else if(typedStrings.length <= 2 && selectedItems.children.length > 0){
+        console.log('c')
+        filteredRecipes = allRecipes.map(element => element)
         let allSelectedItems = Array.from(selectedItems.children)
         for(item of allSelectedItems){
             if(item.classList[1] == "selected__items__ingredient"){
-                for(const recipe of filteredRecipes){
+                for(const recipe of allRecipes){
                     let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(item.innerText.toUpperCase()))
                     if(inIngredients == false){
                         let index = filteredRecipes.findIndex(element => element == recipe)
-                        filteredRecipes.splice(1, index)
+                        filteredRecipes.splice(index, 1)
                     }
                 }
             } else if(item.classList[1] == "selected__items__appliance"){
-                for(const recipe of filteredRecipes){
+                for(const recipe of allRecipes){
                     let inAppliance = recipe.appliance.toUpperCase().includes(item.innerText.toUpperCase())
                     if(inAppliance == false){
                         let index = filteredRecipes.findIndex(element => element == recipe)
-                        filteredRecipes.splice(1, index)
+                        filteredRecipes.splice(index, 1)
                     }
                    }
             } else if(item.classList[1] == "selected__items__ustensil") {
-                for(const recipe of filteredRecipes){
+                for(const recipe of allRecipes){
                     let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(typedStrings.toUpperCase()))
                     if(inUstensils == false){
                         let index = filteredRecipes.findIndex(element => element == recipe)
-                        filteredRecipes.splice(1, index)
+                        filteredRecipes.splice(index, 1)
                     }
                 }
             }
@@ -257,36 +265,37 @@ function searchRecipe(typedStrings){
         recipes.forEach(element => element.remove())
         deployJSON(filteredRecipes)
     } else {
-        console.log('c')
+        filteredRecipes = allRecipes.map(element => element)
         let allSelectedItems = Array.from(selectedItems.children)
         for(item of allSelectedItems){
             if(item.classList[1] == "selected__items__ingredient"){
-                for(const recipe of filteredRecipes){
+                for(const recipe of allRecipes){
                     let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(item.innerText.toUpperCase()))
                     if(inIngredients == false){
                         let index = filteredRecipes.findIndex(element => element == recipe)
-                        filteredRecipes.splice(1, index)
+                        filteredRecipes.splice(index, 1)
                     }
                 }
             } else if(item.classList[1] == "selected__items__appliance"){
-                for(const recipe of filteredRecipes){
+                for(const recipe of allRecipes){
                     let inAppliance = recipe.appliance.toUpperCase().includes(item.innerText.toUpperCase())
                     if(inAppliance == false){
                         let index = filteredRecipes.findIndex(element => element == recipe)
-                        filteredRecipes.splice(1, index)
+                        filteredRecipes.splice(index, 1)
                     }
                    }
             } else if(item.classList[1] == "selected__items__ustensil"){
-                for(const recipe of filteredRecipes){
-                    let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(typedStrings.toUpperCase()))
+                for(const recipe of allRecipes){
+                    let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(item.innerText.toUpperCase()))
                     if(inUstensils == false){
                         let index = filteredRecipes.findIndex(element => element == recipe)
-                        filteredRecipes.splice(1, index)
+                        filteredRecipes.splice(index, 1)
                     }
                 }
             }
         }
-        for(const recipe of filteredRecipes){
+        let secondlyFilteredRecipes = filteredRecipes.map(element => element)
+        for(const recipe of secondlyFilteredRecipes){
             let inName = recipe.name.toUpperCase().includes(typedStrings.toUpperCase())
             let inDescription = recipe.description.toUpperCase().includes(typedStrings.toUpperCase())
             let inAppliance = recipe.appliance.toUpperCase().includes(typedStrings.toUpperCase())
@@ -294,8 +303,8 @@ function searchRecipe(typedStrings){
             let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(typedStrings.toUpperCase()))
             if(inName == false && inDescription == false && inAppliance == false && inUstensils == false && inIngredients == false){
                 let index = filteredRecipes.findIndex(element => element == recipe)
-                filteredRecipes.splice(1, index)
-            }
+                filteredRecipes.splice(index, 1)
+            } 
         }
         const recipes = document.querySelectorAll('.recipe')
         const ulIngredients = Array.from(ingredientsMenu.children)

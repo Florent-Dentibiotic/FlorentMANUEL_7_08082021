@@ -1484,7 +1484,7 @@
     }, 
     {
         "id": 44,
-        "name": "Crème déssert au chocolat",
+        "name": "Crème dessert au chocolat",
         "servings": 6,
         "ingredients": [
             {
@@ -1503,7 +1503,7 @@
                 "unit": "grammes"
             },
             {
-                "ingredient": "Beurre",
+                "ingredient": "Beurre fondu",
                 "quantity": 50,
                 "unit":"grammes"
             },
