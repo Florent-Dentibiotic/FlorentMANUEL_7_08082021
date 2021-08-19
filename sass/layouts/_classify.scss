@@ -7,23 +7,22 @@
     position: absolute;
     top: 65px;
     overflow: hidden;
-    ul{
-        margin-top: -5px;
-        list-style: none;
-        padding: 0;
-        color: $white;
-        display: grid;
-        grid-template-columns: 
-        repeat(auto-fill,
-        minmax(222px, auto));
-        max-width: 666px;
-        max-height: 328px;
-        font-size: 18px;
-        padding: 12px;
-    }
+    margin-top: -5px;
+    list-style: none;
+    padding: 0;
+    color: $white;
+    display: grid;
+    grid-template-columns: 
+    repeat(auto-fill,
+    minmax(222px, auto));
+    width: 666px;
+    max-height: 340px;
+    font-size: 18px;
+    padding: 12px;
     li{
         padding: 5px;
         cursor: pointer;
+        text-transform: capitalize;
         &:hover{
             color: $grey;
         }

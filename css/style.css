@@ -65,6 +65,7 @@ p {
   padding-left: 1em;
   position: relative;
   outline: none;
+  text-overflow: ellipsis;
 }
 .input__search__primary {
   background-color: #3282F7;
@@ -96,6 +97,10 @@ p {
   right: 1em;
   top: 1.5em;
   cursor: pointer;
+}
+
+.fa-times-circle {
+  margin-left: 0.5em;
 }
 
 .header {
@@ -130,22 +135,21 @@ p {
   position: absolute;
   top: 65px;
   overflow: hidden;
-}
-.ingredients__menu ul, .appliance__menu ul, .ustensils__menu ul {
   margin-top: -5px;
   list-style: none;
   padding: 0;
   color: #fff;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(222px, auto));
-  max-width: 666px;
-  max-height: 328px;
+  width: 666px;
+  max-height: 340px;
   font-size: 18px;
   padding: 12px;
 }
 .ingredients__menu li, .appliance__menu li, .ustensils__menu li {
   padding: 5px;
   cursor: pointer;
+  text-transform: capitalize;
 }
 .ingredients__menu li:hover, .appliance__menu li:hover, .ustensils__menu li:hover {
   color: #C7BEBE;
