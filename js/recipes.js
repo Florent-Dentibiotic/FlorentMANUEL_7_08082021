@@ -139,7 +139,7 @@ function openSearchInput(){
         btnActive[0].firstElementChild.classList.replace('d-none', 'd-block')
         btnActive[0].lastElementChild.classList.replace('d-block', 'd-none')
         btnActive[0].lastElementChild.firstElementChild.value = ""
-        searchRecipe("")
+        //searchRecipe("")
     }
     this.firstElementChild.classList.replace('d-block', 'd-none')
     this.lastElementChild.classList.replace('d-none', 'd-block')
@@ -186,6 +186,9 @@ function removeElement(){
 
 // corriger situation :: selectedItem.length > 0 !!!
 function searchRecipe(typedStrings){
+    filteredRecipes = allRecipes.map(element => element)
+    let allSelectedItems = Array.from(selectedItems.children)
+    let indexSelectedItem = []
     if(typedStrings.length <= 2 && selectedItems.children.length == 0){
         console.log('a')
         const recipes = document.querySelectorAll('.recipe')
@@ -196,11 +199,9 @@ function searchRecipe(typedStrings){
         ulAppliances.forEach(element => element.remove())
         ulUstensils.forEach(element => element.remove())
         recipes.forEach(element => element.remove())
-        deployJSON(allRecipes)
+        deployJSON(filteredRecipes)
     } else if(typedStrings.length > 2 && selectedItems.children.length == 0){
         console.log('b')
-        filteredRecipes = allRecipes.map(element => element)
-        let indexSelectedItem = []
         for(const recipe of allRecipes){
             let inName = recipe.name.toUpperCase().includes(typedStrings.toUpperCase())
             let inDescription = recipe.description.toUpperCase().includes(typedStrings.toUpperCase())
@@ -228,10 +229,6 @@ function searchRecipe(typedStrings){
         filterItems()
     } else if(typedStrings.length <= 2 && selectedItems.children.length > 0){
         console.log('c')
-        filteredRecipes = allRecipes.map(element => element)
-        //let filteredRecipesIterated = filteredRecipes.entries()
-        let allSelectedItems = Array.from(selectedItems.children)
-        let indexSelectedItem = []
         for(item of allSelectedItems){
             if(item.classList[1] == "selected__items__ingredient"){
                 for(const recipe of allRecipes){
@@ -266,7 +263,6 @@ function searchRecipe(typedStrings){
             }
         }
         indexSelectedItem.sort((a,b) => b - a)
-        console.log(indexSelectedItem)
         indexSelectedItem.forEach(element => filteredRecipes.splice(element, 1))
         const recipes = document.querySelectorAll('.recipe')
         const ulIngredients = Array.from(ingredientsMenu.children)
@@ -280,9 +276,6 @@ function searchRecipe(typedStrings){
         filterItems()
     } else {
         console.log('d')
-        filteredRecipes = allRecipes.map(element => element)
-        let allSelectedItems = Array.from(selectedItems.children)
-        let indexSelectedItem = []
         for(item of allSelectedItems){
             if(item.classList[1] == "selected__items__ingredient"){
                 for(const recipe of allRecipes){
@@ -331,7 +324,6 @@ function searchRecipe(typedStrings){
             } 
         }
         indexSelectedItem.sort((a,b) => b - a)
-        console.log(indexSelectedItem)
         for(const index of indexSelectedItem){
             filteredRecipes.splice(index, 1)
         }
