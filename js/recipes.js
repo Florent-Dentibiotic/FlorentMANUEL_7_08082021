@@ -23,6 +23,10 @@ fetch(myRequest)
     }
     );
 
+// Factory method
+
+//class JsonFactory //
+
 // Event listener
     // to open and close search inputs 
 btnSearchNodes.forEach(element => element.addEventListener('focusin', openSearchInput))
@@ -189,7 +193,7 @@ function searchRecipe(typedStrings){
     filteredRecipes = allRecipes.map(element => element)
     let allSelectedItems = Array.from(selectedItems.children)
     let indexSelectedItem = []
-    if(typedStrings.length <= 2 && selectedItems.children.length == 0){
+    if(typedStrings.length < 3 && selectedItems.children.length == 0){
         console.log('a')
         const recipes = document.querySelectorAll('.recipe')
         const ulIngredients = Array.from(ingredientsMenu.children)
@@ -200,7 +204,7 @@ function searchRecipe(typedStrings){
         ulUstensils.forEach(element => element.remove())
         recipes.forEach(element => element.remove())
         deployJSON(filteredRecipes)
-    } else if(typedStrings.length > 2 && selectedItems.children.length == 0){
+    } else if(typedStrings.length >= 3 && selectedItems.children.length == 0){
         console.log('b')
         for(const recipe of allRecipes){
             let inName = recipe.name.toUpperCase().includes(typedStrings.toUpperCase())
@@ -227,7 +231,7 @@ function searchRecipe(typedStrings){
         recipes.forEach(element => element.remove())
         deployJSON(filteredRecipes)
         filterItems()
-    } else if(typedStrings.length <= 2 && selectedItems.children.length > 0){
+    } else if(typedStrings.length < 3 && selectedItems.children.length > 0){
         console.log('c')
         for(item of allSelectedItems){
             if(item.classList[1] == "selected__items__ingredient"){
