@@ -186,8 +186,6 @@ function removeElement(){
 
 // corriger situation :: selectedItem.length > 0 !!!
 function searchRecipe(typedStrings){
-    let recipeSelected = []
-
     if(typedStrings.length <= 2 && selectedItems.children.length == 0){
         console.log('a')
         const recipes = document.querySelectorAll('.recipe')
@@ -200,20 +198,24 @@ function searchRecipe(typedStrings){
         recipes.forEach(element => element.remove())
         deployJSON(allRecipes)
     } else if(typedStrings.length > 2 && selectedItems.children.length == 0){
+        console.log('b')
         filteredRecipes = allRecipes.map(element => element)
+        let indexSelectedItem = []
         for(const recipe of allRecipes){
             let inName = recipe.name.toUpperCase().includes(typedStrings.toUpperCase())
             let inDescription = recipe.description.toUpperCase().includes(typedStrings.toUpperCase())
             let inAppliance = recipe.appliance.toUpperCase().includes(typedStrings.toUpperCase())
             let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(typedStrings.toUpperCase()))
             let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(typedStrings.toUpperCase()))
-            if(inName == true || inDescription == true || inAppliance == true || inUstensils == true || inIngredients == true){
-                recipeSelected.push(recipe)
-            } else {
+            if(inName == false && inDescription == false && inAppliance == false && inUstensils == false && inIngredients == false){
                 let index = filteredRecipes.findIndex(element => element == recipe)
-                filteredRecipes.splice(index, 1)
-            }
+                if(! indexSelectedItem.includes(index)){
+                    indexSelectedItem.push(index)
+                }
+            }    
         }
+        indexSelectedItem.sort((a,b) => b - a)
+        indexSelectedItem.forEach(element => filteredRecipes.splice(element, 1))
         const recipes = document.querySelectorAll('.recipe')
         const ulIngredients = Array.from(ingredientsMenu.children)
         const ulAppliances = Array.from(applianceMenu.children)
@@ -222,7 +224,7 @@ function searchRecipe(typedStrings){
         ulAppliances.forEach(element => element.remove())
         ulUstensils.forEach(element => element.remove())
         recipes.forEach(element => element.remove())
-        deployJSON(recipeSelected)
+        deployJSON(filteredRecipes)
         filterItems()
     } else if(typedStrings.length <= 2 && selectedItems.children.length > 0){
         console.log('c')
