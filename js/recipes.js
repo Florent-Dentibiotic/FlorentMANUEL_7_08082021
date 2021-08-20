@@ -45,6 +45,13 @@ class FilterRecipes {
 
 }
 
+class SizeFactory {
+
+    static adjustSize(){
+        
+    }
+}
+
 class ItemSearchFactory {
 
     static searchItems(source, value){
