@@ -156,6 +156,7 @@ function deployJSON(recipes){
             let newUl = document.createElement('ul');
             newRecipeDetails.appendChild(newUl);
             newUl.classList.add('recipe__ingredient');
+            let allIngredientsData = [];
             let allIngredients = recipe.ingredients;
             allIngredients.forEach(element => {
                 let newLi = document.createElement('li');
@@ -167,6 +168,7 @@ function deployJSON(recipes){
                 } else {
                     newLi.innerHTML = `<strong>${element.ingredient}</strong>`;
                 }
+                allIngredientsData.push(element.ingredient);
             });
             let newP = document.createElement('p');
             newRecipeDetails.appendChild(newP);
@@ -177,6 +179,7 @@ function deployJSON(recipes){
         newRecipe.setAttribute('data-name', recipe.name);
         newRecipe.setAttribute('data-appliance', recipe.appliance);
         newRecipe.setAttribute('data-ustensils', allUstensils);
+        newRecipe.setAttribute('data-ingredients', allIngredientsData);
 
         for(const ingredient of allIngredients){
             if(! newIngredientsArray.includes(ingredient.ingredient)){
