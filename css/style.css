@@ -97,6 +97,7 @@ p {
   right: 1em;
   top: 1.5em;
   cursor: pointer;
+  z-index: 5;
 }
 
 .fa-times-circle {
