@@ -29,7 +29,6 @@ class DeployItemFactory {
             newLi.textContent = element 
         }
     }
-
 }
 
 class FilterRecipes {
@@ -42,7 +41,6 @@ class FilterRecipes {
             }
         } 
     }
-
 }
 
 class SizeFactory {
