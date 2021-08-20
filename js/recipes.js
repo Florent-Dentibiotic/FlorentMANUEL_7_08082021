@@ -14,10 +14,77 @@ let filteredRecipes = []
 let newIngredientsArray = []
 let newApplianceArray = []
 let newUstensilsArray = []
-let ingredientsVisible = [] //document.querySelectorAll('.ingredient[class="ingredient d-block"]')
-let appliancesVisible = [] //document.querySelectorAll('.appliance[class="appliance d-block"]')
-let ustensilsVisible = [] //document.querySelectorAll('.ustensil[class="ustensil d-block"]')
+let ingredientsVisible = [] 
+let appliancesVisible = []
+let ustensilsVisible = [] 
 
+class DeployItemFactory {
+
+    static deployEachItem (source, destination, newClass){
+        for (const element of source){
+            let newLi = document.createElement('li')
+            newLi.classList.add(newClass)
+            newLi.classList.add('d-block')
+            destination.appendChild(newLi)
+            newLi.textContent = element 
+        }
+    }
+
+}
+
+class FilterRecipes {
+
+    static pushFromIndex(recipe, itemRef, arraySource, indexArray){
+        if(itemRef == false){
+            let index = arraySource.findIndex(element => element == recipe)
+            if(! indexArray.includes(index)){
+                indexArray.push(index)
+            }
+        } 
+    }
+
+}
+
+class ItemSearchFactory {
+
+    static searchItems(source, value){
+        for(const element of source){
+            if(element.innerText.toUpperCase().includes(value.toUpperCase())){
+                element.classList.replace('d-none', 'd-block')
+            } else {
+                element.classList.replace('d-block', 'd-none')
+            }
+        }
+    }
+
+}
+
+class FilterItemsFactory {
+
+    static arrayItemsFromVisibleRecipes(source, object){
+        if(! source.includes(object.toUpperCase())){
+            source.push(object.toUpperCase())
+        }
+    }
+
+    static filterFromIndex(source, originalArray, reference){
+        if(source.classList[1] == reference){
+            let index = originalArray.findIndex(element => element.toUpperCase() == source.innerText.toUpperCase())
+            originalArray.splice(index, 1)
+        } 
+    }
+
+    static filterItems(source, reference){
+        for(const element of source){
+            if(! reference.includes(element.innerText.toUpperCase())){
+                element.classList.replace('d-block', 'd-none')
+            } else {
+                element.classList.replace('d-none', 'd-block')
+            }
+        }
+    }
+
+}
 
 // JSON extraction
 fetch(myRequest)
@@ -112,27 +179,10 @@ function deployItems(){
     newIngredientsArray.sort()
     newApplianceArray.sort()
     newUstensilsArray.sort()
-    for (const ingredient of newIngredientsArray){
-        let newLi = document.createElement('li')
-        newLi.classList.add('ingredient')
-        newLi.classList.add('d-block')
-        ingredientsMenu.appendChild(newLi)
-        newLi.textContent = ingredient 
-    }
-    for (const appliance of newApplianceArray){
-        let newLi = document.createElement('li')
-        newLi.classList.add('appliance')
-        newLi.classList.add('d-block')
-        applianceMenu.appendChild(newLi)
-        newLi.textContent = appliance
-    }
-    for (const ustensil of newUstensilsArray){
-        let newLi = document.createElement('li')
-        newLi.classList.add(`ustensil`)
-        newLi.classList.add('d-block')
-        ustensilsMenu.appendChild(newLi)
-        newLi.textContent = ustensil
-    }
+
+    DeployItemFactory.deployEachItem(newIngredientsArray, ingredientsMenu, 'ingredient')
+    DeployItemFactory.deployEachItem(newApplianceArray, applianceMenu, 'appliance')
+    DeployItemFactory.deployEachItem(newUstensilsArray, ustensilsMenu, 'ustensil')
 
     //Event listener for selecting items
     ingredientsMenu.childNodes.forEach(element => element.addEventListener('click', function(){
@@ -168,29 +218,50 @@ function closeSearchInput(){
     searchItems(this.previousElementSibling)
 }
 
-function searchRecipe(typedStrings, recipeList){
-    if(typedStrings.length >= 3){
-        let indexSelectedItem = []
-        for(const recipe of recipeList){
-            let inName = recipe.name.toUpperCase().includes(typedStrings.toUpperCase())
-            let inDescription = recipe.description.toUpperCase().includes(typedStrings.toUpperCase())
-            let inAppliance = recipe.appliance.toUpperCase().includes(typedStrings.toUpperCase())
-            let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(typedStrings.toUpperCase()))
-            let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(typedStrings.toUpperCase()))
-            if(inName == false && inDescription == false && inAppliance == false && inUstensils == false && inIngredients == false){
-                let index = filteredRecipes.findIndex(element => element == recipe)
-                if(! indexSelectedItem.includes(index)){
-                    recipesSection.children[index].classList.replace('d-block', 'd-none')
-                } 
-            } /*else {
-                let index = filteredRecipes.findIndex(element => element == recipe)
-                recipesSection.children[index].classList.replace('d-none', 'd-block')
-            }*/
+function searchRecipe(){
+    let allRecipesVisible = Array.from(recipesSection.children)
+    allRecipesVisible.forEach(element => element.classList.replace('d-none', 'd-block'))
+    let indexSelectedItem = []
+    if(selectedItems.children.length > 0 || firstInputSearch.value != ""){
+        let allSelectedItems = Array.from(selectedItems.children)
+        for(const item of allSelectedItems){
+            if(item.classList[1] == "selected__items__ingredient"){
+                for(const recipe of allRecipes){
+                    let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(item.innerText.toUpperCase()))
+                    FilterRecipes.pushFromIndex(recipe, inIngredients, filteredRecipes, indexSelectedItem)
+                }
+            } else if(item.classList[1] == "selected__items__appliance"){
+                for(const recipe of allRecipes){
+                    let inAppliance = recipe.appliance.toUpperCase().includes(item.innerText.toUpperCase())
+                    FilterRecipes.pushFromIndex(recipe, inAppliance, filteredRecipes, indexSelectedItem)
+                }
+            } else if(item.classList[1] == "selected__items__ustensil"){
+                for(const recipe of allRecipes){
+                    let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(item.innerText.toUpperCase()))
+                    FilterRecipes.pushFromIndex(recipe, inUstensils, filteredRecipes, indexSelectedItem)
+                }
+            }
         }
-    } /*else {
-        for(const recipe of recipesSection.children)
-        recipe.classList.replace('d-none', 'd-block')
-    }*/
+        if(firstInputSearch.value != ""){
+            for(const recipe of allRecipes){
+                let inName = recipe.name.toUpperCase().includes(firstInputSearch.value.toUpperCase())
+                let inDescription = recipe.description.toUpperCase().includes(firstInputSearch.value.toUpperCase())
+                let inAppliance = recipe.appliance.toUpperCase().includes(firstInputSearch.value.toUpperCase())
+                let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(firstInputSearch.value.toUpperCase()))
+                let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(firstInputSearch.value.toUpperCase()))
+                if(inName == false && inDescription == false && inAppliance == false && inUstensils == false && inIngredients == false){
+                    let index = filteredRecipes.findIndex(element => element == recipe)
+                    if(! indexSelectedItem.includes(index)){
+                        indexSelectedItem.push(index)
+                    } 
+                } 
+            }
+        }
+
+        for(const index of indexSelectedItem){
+            recipesSection.children[index].classList.replace('d-block', 'd-none')
+        }
+    }
 }
 
 function filterItems(){
@@ -208,81 +279,43 @@ function filterItems(){
     let ustensilsFromVisibleRecipes = []
     for(const recipe of visibleRecipes){
         for(const ingredient of recipe.ingredients){
-            if(! ingredientsFromVisibleRecipes.includes(ingredient.ingredient.toUpperCase())){
-                ingredientsFromVisibleRecipes.push(ingredient.ingredient.toUpperCase())
-            }
+            FilterItemsFactory.arrayItemsFromVisibleRecipes(ingredientsFromVisibleRecipes, ingredient.ingredient)
         }
-        if(! appliancesFromVisibleRecipes.includes(recipe.appliance.toUpperCase())){
-            appliancesFromVisibleRecipes.push(recipe.appliance.toUpperCase())
-        }
+        FilterItemsFactory.arrayItemsFromVisibleRecipes(appliancesFromVisibleRecipes, recipe.appliance)
         for(const ustensil of recipe.ustensils){
-            if(! ustensilsFromVisibleRecipes.includes(ustensil.toUpperCase())){
-                ustensilsFromVisibleRecipes.push(ustensil.toUpperCase())
-            }
+            FilterItemsFactory.arrayItemsFromVisibleRecipes(ustensilsFromVisibleRecipes, ustensil)
         }
     }
-    for(const ingredient of ingredients){
-        if(! ingredientsFromVisibleRecipes.includes(ingredient.innerText.toUpperCase())){
-            ingredient.classList.replace('d-block', 'd-none')
-        } else {
-            ingredient.classList.replace('d-none', 'd-block')
-        }
-    }
-    for(const appliance of appliances){
-        if(! appliancesFromVisibleRecipes.includes(appliance.innerText.toUpperCase())){
-            appliance.classList.replace('d-block', 'd-none')
-        } else {
-            appliance.classList.replace('d-none', 'd-block')
-        }
-    }
-    for(const ustensil of ustensils){
-        if(! ustensilsFromVisibleRecipes.includes(ustensil.innerText.toUpperCase())){
-            ustensil.classList.replace('d-block', 'd-none')
-        } else {
-            ustensil.classList.replace('d-none', 'd-block')
-        }
-    }
+
     if(selectedItems.children.length > 0){
-        // faire en sorte d'effacer l'item de sa liste
+        for(const item of selectedItems.children){
+            FilterItemsFactory.filterFromIndex(item, ingredientsFromVisibleRecipes, "selected__items__ingredient")
+            FilterItemsFactory.filterFromIndex(item, appliancesFromVisibleRecipes, "selected__items__appliance")
+            FilterItemsFactory.filterFromIndex(item, ustensilsFromVisibleRecipes, "selected__items__ustensil")
+        }
     }
+    
+    FilterItemsFactory.filterItems(ingredients, ingredientsFromVisibleRecipes);
+    FilterItemsFactory.filterItems(appliances, appliancesFromVisibleRecipes);
+    FilterItemsFactory.filterItems(ustensils, ustensilsFromVisibleRecipes);
+
     ingredientsVisible = document.querySelectorAll('.ingredient[class="ingredient d-block"]')
     appliancesVisible = document.querySelectorAll('.appliance[class="appliance d-block"]')
     ustensilsVisible = document.querySelectorAll('.ustensil[class="ustensil d-block"]')
-
 }
 
 function searchItems(input){
     if(input.id == "ingredients"){
-        for(const ingredient of ingredientsVisible){
-            if(ingredient.innerText.toUpperCase().includes(input.value.toUpperCase())){
-                ingredient.classList.replace('d-none', 'd-block')
-            } else {
-                ingredient.classList.replace('d-block', 'd-none')
-            }
-        }
+        ItemSearchFactory.searchItems(ingredientsVisible, input.value)
     } else if(input.id == "appliances"){
-        for(const appliance of appliancesVisible){
-            if(appliance.innerText.toUpperCase().includes(input.value.toUpperCase())){
-                appliance.classList.replace('d-none', 'd-block')
-            } else {
-                appliance.classList.replace('d-block', 'd-none')
-            }
-        }
+        ItemSearchFactory.searchItems(appliancesVisible, input.value)
     } else if(input.id == "ustensils"){
-        for(const ustensil of ustensilsVisible){
-            if(ustensil.innerText.toUpperCase().includes(input.value.toUpperCase())){
-                ustensil.classList.replace('d-none', 'd-block')
-            } else {
-                ustensil.classList.replace('d-block', 'd-none')
-            }
-        }
+        ItemSearchFactory.searchItems(ustensilsVisible, input.value)
     }
 }
 
 function selectingItems(infos){
-     // search recipes and filter items from actuals recipes 
-     searchRecipe(infos.innerText, filteredRecipes)
-     filterItems()
+
      // hide item in its list
      let allItems = document.querySelectorAll('.btn__group li')
      let thisItem = Array.from(allItems).find(element => element.innerText.toUpperCase() == infos.innerText.toUpperCase())
@@ -298,242 +331,16 @@ function selectingItems(infos){
      let cross = document.querySelectorAll('.fa-times-circle')
      cross.forEach(element => element.addEventListener('click', removeElement))
  
+     // adjust items lists
+     searchRecipe()
+     filterItems()
+
      // inputs value = ""
      inputsSearchNodes.forEach(element => element.value = "")
 }
 
 function removeElement(){
     this.parentElement.remove()
-    //searchRecipe("")
-}
-/*
-// Event listener
-    // to open and close search inputs 
-
-inputsSearchNodes.forEach(element => element.addEventListener('keyup', function(){searchItems(element.value)}))
-
-function deployJSON(data){
-      
-
-    
-}
-
-function selectingItems(infos){
-    // search recipes and filter items from actuals recipes 
-    searchRecipe(infos.innerText)
-
-    // hide item in its list
-    /*let allItems = document.querySelectorAll('.btn__group li')
-    let thisItem = Array.from(allItems).find(element => element.innerText.toUpperCase() == infos.innerText.toUpperCase())
-    thisItem.classList.replace('d-block','d-none')*/
-
-    // creating item in selectedSection
-/*    let newDiv = document.createElement('div')
-    selectedItems.appendChild(newDiv)
-    newDiv.classList.add("item")
-    newDiv.classList.add(`selected__items__${infos.classList[0]}`)
-    newDiv.innerHTML = `${infos.innerHTML}<i class="far fa-times-circle"></i>`
-    // event listener to close this selected element
-    let cross = document.querySelectorAll('.fa-times-circle')
-    cross.forEach(element => element.addEventListener('click', removeElement))
-
-    // inputs value = ""
-    inputsSearchNodes.forEach(element => element.value = "")
-    
-    //filterItems(infos.parentElement.previousElementSibling.previousElementSibling)
+    searchRecipe()
     filterItems()
 }
-
-
-
-// corriger situation :: selectedItem.length > 0 !!!
-function searchRecipe(typedStrings){
-    if(typedStrings.length <= 2 && selectedItems.children.length == 0){
-        console.log('a')
-        const recipes = document.querySelectorAll('.recipe')
-        const ulIngredients = Array.from(ingredientsMenu.children)
-        const ulAppliances = Array.from(applianceMenu.children)
-        const ulUstensils = Array.from(ustensilsMenu.children)
-        ulIngredients.forEach(element => element.remove())
-        ulAppliances.forEach(element => element.remove())
-        ulUstensils.forEach(element => element.remove())
-        recipes.forEach(element => element.remove())
-        deployJSON(allRecipes)
-    } else if(typedStrings.length > 2 && selectedItems.children.length == 0){
-        console.log('b')
-        filteredRecipes = allRecipes.map(element => element)
-        let indexSelectedItem = []
-        for(const recipe of allRecipes){
-            let inName = recipe.name.toUpperCase().includes(typedStrings.toUpperCase())
-            let inDescription = recipe.description.toUpperCase().includes(typedStrings.toUpperCase())
-            let inAppliance = recipe.appliance.toUpperCase().includes(typedStrings.toUpperCase())
-            let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(typedStrings.toUpperCase()))
-            let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(typedStrings.toUpperCase()))
-            if(inName == false && inDescription == false && inAppliance == false && inUstensils == false && inIngredients == false){
-                let index = filteredRecipes.findIndex(element => element == recipe)
-                if(! indexSelectedItem.includes(index)){
-                    indexSelectedItem.push(index)
-                }
-            }    
-        }
-        indexSelectedItem.sort((a,b) => b - a)
-        indexSelectedItem.forEach(element => filteredRecipes.splice(element, 1))
-        const recipes = document.querySelectorAll('.recipe')
-        const ulIngredients = Array.from(ingredientsMenu.children)
-        const ulAppliances = Array.from(applianceMenu.children)
-        const ulUstensils = Array.from(ustensilsMenu.children)
-        ulIngredients.forEach(element => element.remove())
-        ulAppliances.forEach(element => element.remove())
-        ulUstensils.forEach(element => element.remove())
-        recipes.forEach(element => element.remove())
-        deployJSON(filteredRecipes)
-        filterItems()
-    } else if(typedStrings.length <= 2 && selectedItems.children.length > 0){
-        console.log('c')
-        filteredRecipes = allRecipes.map(element => element)
-        //let filteredRecipesIterated = filteredRecipes.entries()
-        let allSelectedItems = Array.from(selectedItems.children)
-        let indexSelectedItem = []
-        for(item of allSelectedItems){
-            if(item.classList[1] == "selected__items__ingredient"){
-                for(const recipe of allRecipes){
-                    let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(item.innerText.toUpperCase()))
-                    if(inIngredients == false){
-                        let index = filteredRecipes.findIndex(element => element == recipe)
-                        if(! indexSelectedItem.includes(index)){
-                            indexSelectedItem.push(index)
-                        }
-                    }
-                }
-            } else if(item.classList[1] == "selected__items__appliance"){
-                for(const recipe of allRecipes){
-                    let inAppliance = recipe.appliance.toUpperCase().includes(item.innerText.toUpperCase())
-                    if(inAppliance == false){
-                        let index = filteredRecipes.findIndex(element => element == recipe)
-                        if(! indexSelectedItem.includes(index)){
-                            indexSelectedItem.push(index)
-                        }
-                    }
-                   }
-            } else if(item.classList[1] == "selected__items__ustensil") {
-                for(const recipe of allRecipes){
-                    let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(typedStrings.toUpperCase()))
-                    if(inUstensils == false){
-                        let index = filteredRecipes.findIndex(element => element == recipe)
-                        if(! indexSelectedItem.includes(index)){
-                            indexSelectedItem.push(index)
-                        }
-                    }
-                }
-            }
-        }
-        indexSelectedItem.sort((a,b) => b - a)
-        console.log(indexSelectedItem)
-        indexSelectedItem.forEach(element => filteredRecipes.splice(element, 1))
-        const recipes = document.querySelectorAll('.recipe')
-        const ulIngredients = Array.from(ingredientsMenu.children)
-        const ulAppliances = Array.from(applianceMenu.children)
-        const ulUstensils = Array.from(ustensilsMenu.children)
-        ulIngredients.forEach(element => element.remove())
-        ulAppliances.forEach(element => element.remove())
-        ulUstensils.forEach(element => element.remove())
-        recipes.forEach(element => element.remove())
-        deployJSON(filteredRecipes)
-        filterItems()
-    } else {
-        console.log('d')
-        filteredRecipes = allRecipes.map(element => element)
-        let allSelectedItems = Array.from(selectedItems.children)
-        let indexSelectedItem = []
-        for(item of allSelectedItems){
-            if(item.classList[1] == "selected__items__ingredient"){
-                for(const recipe of allRecipes){
-                    let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(item.innerText.toUpperCase()))
-                    if(inIngredients == false){
-                        let index = filteredRecipes.findIndex(element => element == recipe)
-                        if(! indexSelectedItem.includes(index)){
-                            indexSelectedItem.push(index)
-                        }
-                    }
-                }
-            } else if(item.classList[1] == "selected__items__appliance"){
-                for(const recipe of allRecipes){
-                    let inAppliance = recipe.appliance.toUpperCase().includes(item.innerText.toUpperCase())
-                    if(inAppliance == false){
-                        let index = filteredRecipes.findIndex(element => element == recipe)
-                        if(! indexSelectedItem.includes(index)){
-                            indexSelectedItem.push(index)
-                        }
-                    }
-                   }
-            } else if(item.classList[1] == "selected__items__ustensil"){
-                for(const recipe of allRecipes){
-                    let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(item.innerText.toUpperCase()))
-                    if(inUstensils == false){
-                        let index = filteredRecipes.findIndex(element => element == recipe)
-                        if(! indexSelectedItem.includes(index)){
-                            indexSelectedItem.push(index)
-                        }
-                    }
-                }
-            }
-        }
-        let secondlyFilteredRecipes = filteredRecipes.map(element => element)
-        for(const recipe of secondlyFilteredRecipes){
-            let inName = recipe.name.toUpperCase().includes(typedStrings.toUpperCase())
-            let inDescription = recipe.description.toUpperCase().includes(typedStrings.toUpperCase())
-            let inAppliance = recipe.appliance.toUpperCase().includes(typedStrings.toUpperCase())
-            let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(typedStrings.toUpperCase()))
-            let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(typedStrings.toUpperCase()))
-            if(inName == false && inDescription == false && inAppliance == false && inUstensils == false && inIngredients == false){
-                let index = filteredRecipes.findIndex(element => element == recipe)
-                    if(! indexSelectedItem.includes(index)){
-                        indexSelectedItem.push(index)
-                    }
-            } 
-        }
-        indexSelectedItem.sort((a,b) => b - a)
-        console.log(indexSelectedItem)
-        for(const index of indexSelectedItem){
-            filteredRecipes.splice(index, 1)
-        }
-        const recipes = document.querySelectorAll('.recipe')
-        const ulIngredients = Array.from(ingredientsMenu.children)
-        const ulAppliances = Array.from(applianceMenu.children)
-        const ulUstensils = Array.from(ustensilsMenu.children)
-        ulIngredients.forEach(element => element.remove())
-        ulAppliances.forEach(element => element.remove())
-        ulUstensils.forEach(element => element.remove())
-        recipes.forEach(element => element.remove())
-        deployJSON(filteredRecipes)
-        filterItems()
-    }
-}
-
-function filterItems(){
-    let everyIngredients = document.querySelectorAll('.ingredient')
-    let everyAppliances = document.querySelectorAll('.appliance')
-    let everyUstensils = document.querySelectorAll('.ustensil')
-    
-    for(const item of selectedItems.children){
-        if(item.classList[1] == "selected__items__ingredient"){
-            for(const ingredient of everyIngredients){
-                if(ingredient.innerText.toUpperCase() == item.innerText.toUpperCase()){
-                    ingredient.classList.replace('d-block','d-none')
-                }
-            }
-        } else if(item.classList[1] == "selected__items__appliance"){
-            for(const appliance of everyAppliances){
-                if(appliance.innerText.toUpperCase() == item.innerText.toUpperCase()){
-                    appliance.classList.replace('d-block','d-none')
-                }
-            }
-        } else if(item.classList[1] == "selected__items__ustensil"){
-            for(const ustensil of everyUstensils){
-                if(ustensil.innerText.toUpperCase() == item.innerText.toUpperCase()){
-                    ustensil.classList.replace('d-block','d-none')
-                }
-            }
-        }
-    }
-}*/
