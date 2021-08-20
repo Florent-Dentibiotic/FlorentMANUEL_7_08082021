@@ -244,28 +244,28 @@ function searchRecipe(){
         for(const item of allSelectedItems){
             if(item.classList[1] == "selected__items__ingredient"){
                 for(const recipe of allRecipes){
-                    let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(item.innerText.toUpperCase()))
+                    let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().indexOf(item.innerText.toUpperCase()) != -1)
                     FilterRecipes.pushFromIndex(recipe, inIngredients, filteredRecipes, indexSelectedItem)
                 }
             } else if(item.classList[1] == "selected__items__appliance"){
                 for(const recipe of allRecipes){
-                    let inAppliance = recipe.appliance.toUpperCase().includes(item.innerText.toUpperCase())
+                    let inAppliance = recipe.appliance.toUpperCase().indexOf(item.innerText.toUpperCase()) != -1
                     FilterRecipes.pushFromIndex(recipe, inAppliance, filteredRecipes, indexSelectedItem)
                 }
             } else if(item.classList[1] == "selected__items__ustensil"){
                 for(const recipe of allRecipes){
-                    let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(item.innerText.toUpperCase()))
+                    let inUstensils = recipe.ustensils.some(element => element.toUpperCase().indexOf(item.innerText.toUpperCase()) != -1)
                     FilterRecipes.pushFromIndex(recipe, inUstensils, filteredRecipes, indexSelectedItem)
                 }
             }
         }
         if(firstInputSearch.value != ""){
             for(const recipe of allRecipes){
-                let inName = recipe.name.toUpperCase().includes(firstInputSearch.value.toUpperCase())
-                let inDescription = recipe.description.toUpperCase().includes(firstInputSearch.value.toUpperCase())
-                let inAppliance = recipe.appliance.toUpperCase().includes(firstInputSearch.value.toUpperCase())
-                let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(firstInputSearch.value.toUpperCase()))
-                let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(firstInputSearch.value.toUpperCase()))
+                let inName = recipe.name.toUpperCase().indexOf(firstInputSearch.value.toUpperCase()) != -1
+                let inDescription = recipe.description.toUpperCase().indexOf(firstInputSearch.value.toUpperCase()) != -1
+                let inAppliance = recipe.appliance.toUpperCase().indexOf(firstInputSearch.value.toUpperCase()) != -1
+                let inUstensils = recipe.ustensils.some(element => element.toUpperCase().indexOf(firstInputSearch.value.toUpperCase()) != -1)
+                let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().indexOf(firstInputSearch.value.toUpperCase()) != -1)
                 if(inName == false && inDescription == false && inAppliance == false && inUstensils == false && inIngredients == false){
                     let index = filteredRecipes.findIndex(element => element == recipe)
                     if(! indexSelectedItem.includes(index)){
