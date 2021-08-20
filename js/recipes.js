@@ -4,6 +4,7 @@ const ingredientsMenu = document.querySelector('ul.ingredients__menu');
 const applianceMenu = document.querySelector('ul.appliance__menu');
 const ustensilsMenu = document.querySelector('ul.ustensils__menu');
 const btnSearchNodes = document.querySelectorAll('.btn__group__search');
+const btnSearchEntry = document.querySelectorAll('.btn__group__search .btn');
 const btnSearch = Array.from(btnSearchNodes);
 const firstInputSearch = document.querySelector('.first__form__input');
 const inputsSearchNodes = document.querySelectorAll('.input__search');
@@ -117,7 +118,7 @@ fetch(myRequest)
     );
 
 // EVENT LISTENER
-btnSearchNodes.forEach(element => element.addEventListener('focusin', openSearchInput));
+btnSearchEntry.forEach(element => element.addEventListener('click', openSearchInput));
 chevronUp.forEach(element => element.addEventListener('click', closeSearchInput));
 firstInputSearch.addEventListener('keyup', function(){
     let activeRecipe = document.querySelectorAll('.recipe[class="recipe d-block"]');
@@ -225,9 +226,9 @@ function openSearchInput(){
         btnActive[0].lastElementChild.classList.replace('d-block', 'd-none');
         btnActive[0].lastElementChild.firstElementChild.value = "";
     }
-    this.firstElementChild.classList.replace('d-block', 'd-none');
-    this.lastElementChild.classList.replace('d-none', 'd-block');
-    this.lastElementChild.firstElementChild.focus();
+    this.classList.replace('d-block', 'd-none');
+    this.nextElementSibling.classList.replace('d-none', 'd-block');
+    this.nextElementSibling.firstElementChild.focus();
 }
 
 function closeSearchInput(){
