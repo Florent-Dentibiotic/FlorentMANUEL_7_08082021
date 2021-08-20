@@ -47,8 +47,20 @@ class FilterRecipes {
 
 class SizeFactory {
 
-    static adjustSize(){
-        
+    static adjustSize(itemList, btnOrigin, placeholderValue){
+        if(itemList.length <= 1){
+            btnOrigin.lastElementChild.firstElementChild.style.width = "170px";
+            btnOrigin.lastElementChild.lastElementChild.style.width = "166px";
+            btnOrigin.lastElementChild.firstElementChild.placeholder = "...";
+        } else if (itemList.length == 2){
+            btnOrigin.lastElementChild.firstElementChild.style.width = "470px";
+            btnOrigin.lastElementChild.lastElementChild.style.width = "466px";
+            btnOrigin.lastElementChild.firstElementChild.placeholder = placeholderValue;
+        } else if (itemList.length > 2){
+            btnOrigin.lastElementChild.firstElementChild.style.width = "690px";
+            btnOrigin.lastElementChild.lastElementChild.style.width = "686px";
+            btnOrigin.lastElementChild.firstElementChild.placeholder = placeholderValue;
+        }
     }
 }
 
@@ -308,6 +320,11 @@ function filterItems(){
     ingredientsVisible = document.querySelectorAll('.ingredient[class="ingredient d-block"]')
     appliancesVisible = document.querySelectorAll('.appliance[class="appliance d-block"]')
     ustensilsVisible = document.querySelectorAll('.ustensil[class="ustensil d-block"]')
+
+    SizeFactory.adjustSize(ingredientsVisible, btnSearchNodes[0], 'Rechercher un ingredient')
+    SizeFactory.adjustSize(appliancesVisible, btnSearchNodes[1], 'Rechercher un appareil')
+    SizeFactory.adjustSize(ustensilsVisible, btnSearchNodes[2], 'Rechercher un ustensil')
+
 }
 
 function searchItems(input){
@@ -318,6 +335,9 @@ function searchItems(input){
     } else if(input.id == "ustensils"){
         ItemSearchFactory.searchItems(ustensilsVisible, input.value)
     }
+    SizeFactory.adjustSize(ingredientsVisible, btnSearchNodes[0], 'Rechercher un ingredient')
+    SizeFactory.adjustSize(appliancesVisible, btnSearchNodes[1], 'Rechercher un appareil')
+    SizeFactory.adjustSize(ustensilsVisible, btnSearchNodes[2], 'Rechercher un ustensil')
 }
 
 function selectingItems(infos){
