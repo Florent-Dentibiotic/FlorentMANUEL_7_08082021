@@ -270,15 +270,18 @@ function searchRecipe(){
             }
         }
         if(firstInputSearch.value != ""){
-            for(const recipe of recipesDeployed){
-                let inName = recipe.dataset.name.toUpperCase().indexOf(firstInputSearch.value.toUpperCase()) == -1;
-                let inDescription = recipe.dataset.description.toUpperCase().indexOf(firstInputSearch.value.toUpperCase()) == -1;
-                let inAppliance = recipe.dataset.appliance.toUpperCase().indexOf(firstInputSearch.value.toUpperCase()) == -1;
-                let inUstensils = recipe.dataset.ustensils.toUpperCase().indexOf(firstInputSearch.value.toUpperCase()) == -1;
-                let inIngredients = recipe.dataset.ingredients.toUpperCase().indexOf(firstInputSearch.value.toUpperCase()) == -1;
-                if(inName == true && inDescription == true && inAppliance == true && inUstensils == true && inIngredients == true){
-                    recipe.classList.replace('d-block', 'd-none')
-                } 
+            let words = firstInputSearch.value.split(' ');
+            for(const word of words){
+                for(const recipe of recipesDeployed){
+                    let inName = recipe.dataset.name.toUpperCase().indexOf(word.toUpperCase()) == -1;
+                    let inDescription = recipe.dataset.description.toUpperCase().indexOf(word.toUpperCase()) == -1;
+                    let inAppliance = recipe.dataset.appliance.toUpperCase().indexOf(word.toUpperCase()) == -1;
+                    let inUstensils = recipe.dataset.ustensils.toUpperCase().indexOf(word.toUpperCase()) == -1;
+                    let inIngredients = recipe.dataset.ingredients.toUpperCase().indexOf(word.toUpperCase()) == -1;
+                    if(inName == true && inDescription == true && inAppliance == true && inUstensils == true && inIngredients == true){
+                        recipe.classList.replace('d-block', 'd-none')
+                    } 
+                }
             }
         }
     }
