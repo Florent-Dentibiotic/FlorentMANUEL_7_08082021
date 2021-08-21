@@ -145,6 +145,7 @@ p {
   max-height: 340px;
   font-size: 18px;
   padding: 12px;
+  z-index: 4;
 }
 .ingredients__menu li, .appliance__menu li, .ustensils__menu li {
   padding: 5px;
