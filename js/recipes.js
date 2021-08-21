@@ -143,6 +143,10 @@ function deployJSON(recipes){
             let newRecipeImg = document.createElement('div');
             newRecipe.appendChild(newRecipeImg);
             newRecipeImg.classList.add('recipe__img');
+            let newImg = document.createElement('img');
+            newRecipeImg.appendChild(newImg)
+            newImg.setAttribute('src', './img/sarah_kitchen_supplies_red_adjusted.jpg')
+            newImg.setAttribute('alt', 'Recipe illustration')
             let newRecipeDetails = document.createElement('div');
             newRecipe.appendChild(newRecipeDetails);
             newRecipeDetails.classList.add('recipe__details');

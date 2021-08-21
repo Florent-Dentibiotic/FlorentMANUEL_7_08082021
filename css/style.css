@@ -205,6 +205,14 @@ p {
   height: 178px;
   background-color: #C7BEBE;
   border-radius: 5px 5px 0 0;
+  text-align: center;
+}
+.recipes .recipe__img img {
+  border-radius: 5px 5px 0 0;
+  width: 380px;
+  max-height: 178px;
+  object-fit: cover;
+  opacity: 0.5;
 }
 .recipes .recipe__details {
   padding: 20px 18px 15px 20px;
@@ -240,7 +248,7 @@ p {
   overflow: hidden;
   white-space: pre-line;
   text-overflow: ellipsis;
-  height: 109px;
+  height: 116px;
   width: 171px;
 }
 
