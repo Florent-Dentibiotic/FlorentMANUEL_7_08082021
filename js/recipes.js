@@ -1,5 +1,6 @@
 const myRequest = new Request('recipes.json');
 const recipesSection = document.querySelector('.recipes');
+const alertSection = document.querySelector('.alert');
 const ingredientsMenu = document.querySelector('ul.ingredients__menu');
 const applianceMenu = document.querySelector('ul.appliance__menu');
 const ustensilsMenu = document.querySelector('ul.ustensils__menu');
@@ -246,6 +247,7 @@ function closeSearchInput(){
 }
 
 function searchRecipe(){
+    alertSection.classList.replace('d-block', 'd-none');
     let allRecipesVisible = Array.from(recipesSection.children);
     allRecipesVisible.forEach(element => element.classList.replace('d-none', 'd-block'));
     let indexSelectedItem = [];
@@ -289,6 +291,9 @@ function searchRecipe(){
         }
         for(const index of indexSelectedItem){
             recipesSection.children[index].classList.replace('d-block', 'd-none');
+        }
+        if(indexSelectedItem.length == 50){
+            alertSection.classList.replace('d-none', 'd-block');
         }
     }
 }

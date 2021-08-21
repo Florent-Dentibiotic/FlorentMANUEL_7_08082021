@@ -253,4 +253,27 @@ p {
   width: 171px;
 }
 
+.alert h2 {
+  padding: 1em;
+  font-family: Lato, "DM Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  opacity: 0;
+  animation: opacityScale 0.3s forwards;
+}
+
+@keyframes opacityScale {
+  0% {
+    margin-left: 50%;
+    opacity: 0;
+  }
+  80% {
+    opacity: 0.4;
+  }
+  100% {
+    margin-left: 0%;
+    opacity: 1;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */
