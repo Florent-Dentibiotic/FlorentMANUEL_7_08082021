@@ -286,23 +286,15 @@ function searchRecipe() {
             for(const word of words){
                 for(const recipe of allRecipes){
                     let inName = recipe.name.toUpperCase().indexOf(word.toUpperCase()) == -1;
-                    if(inName == true){
-                        let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().indexOf(word.toUpperCase()) == -1);
-                        if(inIngredients == true){
-                            let inAppliance = recipe.appliance.toUpperCase().indexOf(word.toUpperCase()) == -1;
-                            if(inAppliance == true){
-                                let inUstensils = recipe.ustensils.some(element => element.toUpperCase().indexOf(word.toUpperCase()) == -1);
-                                if(inUstensils == true){
-                                    let inDescription = recipe.description.toUpperCase().indexOf(word.toUpperCase()) == -1;
-                                    if(inDescription == true){
-                                        let index = filteredRecipes.findIndex(element => element == recipe);
-                                        if(! indexSelectedItem.includes(index)){
-                                            indexSelectedItem.push(index);
-                                        } 
-                                    }
-                                }
-                            }
-                        }
+                    let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().indexOf(word.toUpperCase()) == -1);
+                    let inAppliance = recipe.appliance.toUpperCase().indexOf(word.toUpperCase()) == -1;
+                    let inUstensils = recipe.ustensils.some(element => element.toUpperCase().indexOf(word.toUpperCase()) == -1);
+                    let inDescription = recipe.description.toUpperCase().indexOf(word.toUpperCase()) == -1;
+                    if(inName == true && inIngredients == true && inAppliance == true && inUstensils == true && inDescription == true){
+                        let index = filteredRecipes.findIndex(element => element == recipe);
+                        if(! indexSelectedItem.includes(index)){
+                            indexSelectedItem.push(index);
+                        } 
                     }
                 }
             }
