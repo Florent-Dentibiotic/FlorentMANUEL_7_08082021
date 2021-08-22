@@ -287,14 +287,14 @@ function searchRecipe() {
                 for(const recipe of allRecipes){
                     let inName = recipe.name.toUpperCase().includes(word.toUpperCase());
                     if(inName == false){
-                        let inDescription = recipe.description.toUpperCase().includes(word.toUpperCase());
-                        if(inDescription == false){
-                            let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(word.toUpperCase()));
-                            if(inIngredients == false){
-                                let inAppliance = recipe.appliance.toUpperCase().includes(word.toUpperCase());
-                                if(inAppliance == false){
-                                    let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(word.toUpperCase()));
-                                    if(inUstensils == false){
+                        let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(word.toUpperCase()));
+                        if(inIngredients == false){
+                            let inAppliance = recipe.appliance.toUpperCase().includes(word.toUpperCase());
+                            if(inAppliance == false){
+                                let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(word.toUpperCase()));
+                                if(inUstensils == false){
+                                    let inDescription = recipe.description.toUpperCase().includes(word.toUpperCase());
+                                    if(inDescription == false){
                                         let index = filteredRecipes.findIndex(element => element == recipe);
                                         if(! indexSelectedItem.includes(index)){
                                             indexSelectedItem.push(index);
