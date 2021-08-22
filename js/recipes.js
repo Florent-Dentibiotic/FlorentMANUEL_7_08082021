@@ -274,13 +274,21 @@ function searchRecipe(){
             for(const word of words){
                 for(const recipe of recipesDeployed){
                     let inName = recipe.dataset.name.toUpperCase().indexOf(word.toUpperCase()) == -1;
-                    let inDescription = recipe.dataset.description.toUpperCase().indexOf(word.toUpperCase()) == -1;
-                    let inAppliance = recipe.dataset.appliance.toUpperCase().indexOf(word.toUpperCase()) == -1;
-                    let inUstensils = recipe.dataset.ustensils.toUpperCase().indexOf(word.toUpperCase()) == -1;
-                    let inIngredients = recipe.dataset.ingredients.toUpperCase().indexOf(word.toUpperCase()) == -1;
-                    if(inName == true && inDescription == true && inAppliance == true && inUstensils == true && inIngredients == true){
-                        recipe.classList.replace('d-block', 'd-none')
-                    } 
+                    if(inName == true){
+                        let inIngredients = recipe.dataset.ingredients.toUpperCase().indexOf(word.toUpperCase()) == -1;
+                        if(inIngredients == true){
+                            let inAppliance = recipe.dataset.appliance.toUpperCase().indexOf(word.toUpperCase()) == -1;
+                            if(inAppliance == true){
+                                let inUstensils = recipe.dataset.ustensils.toUpperCase().indexOf(word.toUpperCase()) == -1;
+                                if(inUstensils == true){
+                                    let inDescription = recipe.dataset.description.toUpperCase().indexOf(word.toUpperCase()) == -1;
+                                    if(inDescription == true){
+                                        recipe.classList.replace('d-block', 'd-none');
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
