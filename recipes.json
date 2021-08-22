@@ -501,7 +501,7 @@
         "time": 100,
         "description":"Mélanger la farine et les oeufs, faire fondre 25 grammes de beurre et ajouter à la pâte. Ajouter du sel. Laisser reposer 1 heure. Faire les galettes et laisser refroidire. Faire chauffer les saucisses avec du beurre et l'oignon. Enrouler les saucisses dans les crêpes avec une partie du fromage. Mettre le reste du fromage à raclette par dessus les crêpes. Passer four pendant 20 minutes",
         "appliance": "Four",
-        "ustensils":["Poelle à frire","couteau"]
+        "ustensils":["poelle à frire","couteau"]
     },
     {
         "id": 15,
@@ -1303,7 +1303,7 @@
         "time": 60,
         "description":"Couper les courgettes dans le sens de la longueur. Vider les courgette dans un saladier. Réserver.Faire revenir la chair des courgettes dans 25cl d'huile d'olive. Ajouter l'oignon puis la viande hachée. Mettre la farce dans les courgettes. Ajouter le coulis de tomates. Mettre au four pendant 30 minutes. Avant la fin de la cuisson ajouter le fromage rapé",
         "appliance": "Four",
-        "ustensils":["couteau", "cuillère en bois", "Poelle à frire"]
+        "ustensils":["couteau", "cuillère en bois", "poelle à frire"]
     },
     {
         "id": 38,
@@ -1484,7 +1484,7 @@
     }, 
     {
         "id": 44,
-        "name": "Crème déssert au chocolat",
+        "name": "Crème dessert au chocolat",
         "servings": 6,
         "ingredients": [
             {
@@ -1503,7 +1503,7 @@
                 "unit": "grammes"
             },
             {
-                "ingredient": "Beurre",
+                "ingredient": "Beurre fondu",
                 "quantity": 50,
                 "unit":"grammes"
             },

@@ -9,6 +9,7 @@
     padding-left: 1em;
     position: relative;
     outline: none;
+    text-overflow: ellipsis;
     &__primary{
         background-color: $primary;
     }

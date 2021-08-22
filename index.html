@@ -30,11 +30,9 @@
                         Ingrédients <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="d-none">
-                            <input class="input__search input__search__primary" placeholder="Rechercher un ingrédient" type="text" name="q" aria-label="Search ingredient through the list">
+                            <input id="ingredients" class="input__search input__search__primary" placeholder="Rechercher un ingrédient" type="text" name="q" aria-label="Search ingredient through the list">
                             <i class="fas fa-chevron-up"></i>
-                        </div>
-                        <div class="ingredients__menu d-none">
-                            
+                            <ul class="ingredients__menu"></ul>
                         </div>
                     </div>
                     <div class="btn__group__search my-3">
@@ -42,11 +40,9 @@
                         Appareil <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="d-none">
-                            <input class="input__search input__search__secondary" placeholder="Rechercher un appareil" type="text" name="q" aria-label="Search appliance through the list">
+                            <input id="appliances" class="input__search input__search__secondary" placeholder="Rechercher un appareil" type="text" name="q" aria-label="Search appliance through the list">
                             <i class="fas fa-chevron-up"></i>
-                        </div>
-                        <div class="appliance__menu d-none">
-
+                            <ul class="appliance__menu"></ul>
                         </div>
                     </div>
                     <div class="btn__group__search">
@@ -54,16 +50,28 @@
                         Ustensiles <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="d-none">
-                            <input class="input__search input__search__tertiary" placeholder="Rechercher un ustensil" type="text" name="q" aria-label="Search ustensil through the list">
+                            <input id="ustensils" class="input__search input__search__tertiary" placeholder="Rechercher un ustensil" type="text" name="q" aria-label="Search ustensil through the list">
                             <i class="fas fa-chevron-up"></i>
-                        </div>
-                        <div class="ustensils__menu d-none">
+                            <ul class="ustensils__menu"></ul>
                         </div>
                     </div>
                 </div>
             </nav>
+            <section class="alert d-none">
+                <h2>Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.</h2>
+            </section>
             <section class="recipes">
                 
+            </section>
+            <section class="recipe__modal">
+                <div class="recipe__modal__lightbox">
+                    <span class="fas fa-times quit__recipe__modal" aria-label="Close Dialog"></span>
+                    <!--<span class="fas fa-chevron-left" aria-label="Previous image"></span>
+                    <span class="fas fa-chevron-right" aria-label="Next image"></span>-->
+                    <div class="recipe__modal__lightbox__details">
+                        
+                    </div>
+                </div>
             </section>
         </main>
         <script src="./js/recipes.js"></script>
