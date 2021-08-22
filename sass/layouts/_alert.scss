@@ -1,0 +1,28 @@
+.alert{
+    h2{
+        padding: 1em;
+        font-family: Lato, "DM Sans", sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        opacity: 0;
+        animation: opacityScale .3s forwards;
+    }
+}
+
+@keyframes opacityScale{
+    0% {
+        margin-left: 50%;
+        //letter-spacing: -1px;
+        opacity: 0;
+      }
+
+    80%{
+        opacity: .4;
+    }
+    
+    100% {
+          margin-left: 0%;
+        //letter-spacing: normal;
+        opacity: 1;
+      }
+}
