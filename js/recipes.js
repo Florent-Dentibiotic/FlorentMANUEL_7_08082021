@@ -440,7 +440,7 @@ function openRecipeModal(id) {
     let newUstensilsTitle = document.createElement('li');
     newUstensilUl.appendChild(newUstensilsTitle);
     newUstensilsTitle.classList.add('details__title')
-    newUstensilsTitle.innerText = 'Ustensils :'
+    newUstensilsTitle.innerText = 'Ustensiles :'
     newUstensilUl.classList.add('details__ustensils')
     for(const ustensil of allRecipes[id].ustensils){
         let newLi = document.createElement('li');

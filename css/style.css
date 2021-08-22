@@ -295,10 +295,10 @@ p {
 }
 .recipe__modal__lightbox {
   z-index: 13;
-  margin: 10%;
+  margin: 5% auto;
   position: relative;
-  height: 70%;
   width: 80%;
+  max-width: 1240px;
   background-color: #E7E7E7;
   opacity: 0.8;
   border-radius: 15px;
@@ -313,7 +313,6 @@ p {
 .recipe__modal__lightbox__details h2 {
   grid-area: a;
   font-size: 30px;
-  color: #3282F7;
   text-align: center;
 }
 .recipe__modal__lightbox__details .fa-clock {
