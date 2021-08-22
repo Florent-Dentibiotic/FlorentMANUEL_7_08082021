@@ -145,6 +145,7 @@ p {
   max-height: 340px;
   font-size: 18px;
   padding: 12px;
+  z-index: 4;
 }
 .ingredients__menu li, .appliance__menu li, .ustensils__menu li {
   padding: 5px;
@@ -205,6 +206,14 @@ p {
   height: 178px;
   background-color: #C7BEBE;
   border-radius: 5px 5px 0 0;
+  text-align: center;
+}
+.recipes .recipe__img img {
+  border-radius: 5px 5px 0 0;
+  width: 380px;
+  max-height: 178px;
+  object-fit: cover;
+  opacity: 0.5;
 }
 .recipes .recipe__details {
   padding: 20px 18px 15px 20px;
@@ -240,8 +249,99 @@ p {
   overflow: hidden;
   white-space: pre-line;
   text-overflow: ellipsis;
-  height: 109px;
+  height: 116px;
   width: 171px;
+}
+
+.alert h2 {
+  padding: 1em;
+  font-family: Lato, "DM Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  opacity: 0;
+  animation: opacityScale 0.3s forwards;
+}
+
+@keyframes opacityScale {
+  0% {
+    margin-left: 50%;
+    opacity: 0;
+  }
+  80% {
+    opacity: 0.4;
+  }
+  100% {
+    margin-left: 0%;
+    opacity: 1;
+  }
+}
+.recipe__modal {
+  display: none;
+  position: fixed;
+  z-index: 12;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: #fff;
+}
+.recipe__modal .fa-times {
+  color: #3282F7;
+  font-size: 50px;
+  position: absolute;
+  top: 0.7em;
+  right: 1em;
+}
+.recipe__modal__lightbox {
+  z-index: 13;
+  margin: 5% auto;
+  position: relative;
+  width: 80%;
+  max-width: 1240px;
+  background-color: #E7E7E7;
+  opacity: 0.8;
+  border-radius: 15px;
+  border: 2px solid rgba(199, 190, 190, 0.3);
+  box-shadow: 12px 12px 2px 1px rgba(199, 190, 190, 0.3);
+}
+.recipe__modal__lightbox__details {
+  padding: 3em 10em;
+  display: grid;
+  grid-template-areas: "a a a a" "c c d d" "e e d d" "f f d d";
+}
+.recipe__modal__lightbox__details h2 {
+  grid-area: a;
+  font-size: 30px;
+  text-align: center;
+}
+.recipe__modal__lightbox__details .fa-clock {
+  margin-left: 2em;
+}
+.recipe__modal__lightbox__details .details__ingredients {
+  grid-area: c;
+}
+.recipe__modal__lightbox__details .details__appliance {
+  grid-area: e;
+}
+.recipe__modal__lightbox__details .details__ustensils {
+  grid-area: f;
+}
+.recipe__modal__lightbox__details .details__method {
+  grid-area: d;
+  max-width: 500px;
+  text-align: justify;
+  line-height: 200%;
+}
+.recipe__modal__lightbox__details .details__title {
+  list-style: none;
+  text-decoration: underline;
+  margin-left: -15px;
+  margin-bottom: 0.5em;
+  font-size: 20px;
+}
+.recipe__modal__lightbox__details ul {
+  padding-left: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
