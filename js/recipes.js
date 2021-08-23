@@ -255,6 +255,8 @@ function closeSearchInput() {
     searchItems(this.previousElementSibling);
 }
 
+
+// Principal function with search algorithm 
 function searchRecipe() {
     alertSection.classList.replace('d-block', 'd-none');
     let allRecipesVisible = Array.from(recipesSection.children);
@@ -282,7 +284,7 @@ function searchRecipe() {
         }
         if (firstInputSearch.value != "") {
             let words = firstInputSearch.value.split(' ');
-
+            // search algo :
             for(const word of words){
                 for(const recipe of allRecipes){
                     let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(word.toUpperCase()));
@@ -316,6 +318,9 @@ function searchRecipe() {
     }
 }
 
+
+// Ingredients/Appliance/Ustensils inputs :
+    // filter form recipe visible
 function filterItems() {
     let ingredients = document.querySelectorAll('.ingredient');
     let appliances = document.querySelectorAll('.appliance');
@@ -361,6 +366,7 @@ function filterItems() {
 
 }
 
+    // filter when search in each input
 function searchItems(input) {
     if (input.id == "ingredients") {
         ItemSearchFactory.searchItems(ingredientsVisible, input.value);
@@ -374,6 +380,7 @@ function searchItems(input) {
     SizeFactory.adjustSize(ustensilsVisible, btnSearchNodes[2], 'Rechercher un ustensil');
 }
 
+    // selecting an element in ingredient/appliance/ustensil input 
 function selectingItems(infos) {
 
     // hide item in its list
@@ -399,12 +406,14 @@ function selectingItems(infos) {
     inputsSearchNodes.forEach(element => element.value = "");
 }
 
+    // removing an element from ingredient/appliance/ustensil input 
 function removeElement() {
     this.parentElement.remove();
     searchRecipe();
     filterItems();
 }
 
+// RECIPE MODAL
 function openRecipeModal(id) {
     recipeModal.style.display = 'block';
     let recipeDetails = recipeModal.firstElementChild.lastElementChild;
@@ -412,9 +421,6 @@ function openRecipeModal(id) {
     let newH2 = document.createElement('h2');
     recipeDetails.appendChild(newH2);
     newH2.innerHTML = `${allRecipes[id].name} <i class="far fa-clock"></i> ${allRecipes[id].time} min`;
-    /*let newH3 = document.createElement('h3');
-    recipeDetails.appendChild(newH3);
-    newH3.innerHTML = `<i class="far fa-clock"></i> ${allRecipes[id].time} min`;*/
 
     // list of ingredients + recipe
     let newUl = document.createElement('ul');
