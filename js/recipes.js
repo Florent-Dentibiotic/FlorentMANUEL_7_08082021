@@ -275,20 +275,28 @@ function searchRecipe(){
             let words = firstInputSearch.value.split(' ');
             for (const word of words) {
                 for (const recipe of allRecipes) {
-                    let inUstensils = recipe.ustensils.some(element => element.toUpperCase().includes(word.toUpperCase()));
-                    if(inUstensils == false){
-                        let inIngredients = recipe.ingredients.some(element => element.ingredient.toUpperCase().includes(word.toUpperCase()));
-                        if(inIngredients == false){
-                            let inName = recipe.name.toUpperCase().includes(word.toUpperCase());
-                            if(inName == false){
-                            let inDescription = recipe.description.toUpperCase().includes(word.toUpperCase());
-                            if(inDescription == false){
-                                let inAppliance = recipe.appliance.toUpperCase().includes(word.toUpperCase());
-                                if(inAppliance == false){
+                    let allWordsRecipe = [recipe.appliance, recipe.name].concat(recipe.ustensils).concat(recipe.description.split(' '));
+                    for(const ingredient of recipe.ingredients){
+                        allWordsRecipe.push(ingredient.ingredient);
+                    }
+                    let allWordsRecipeLength = allWordsRecipe.length;
+                    let firstQuarter = allWordsRecipe.slice(0, allWordsRecipeLength/4);
+                    let secondQuarter = allWordsRecipe.slice(allWordsRecipeLength/4, allWordsRecipeLength/2);
+                    let thirdQuarter = allWordsRecipe.slice(allWordsRecipeLength/2, allWordsRecipeLength*3/4);
+                    let fourthQuarter = allWordsRecipe.slice(allWordsRecipeLength*3/4);
+
+                    let inFirst = firstQuarter.some(element => element.toUpperCase().includes(word.toUpperCase()));
+                    if(inFirst == false){
+                        let inSecond = secondQuarter.some(element => element.toUpperCase().includes(word.toUpperCase()));
+                        if(inSecond == false){
+                            let inThird = thirdQuarter.some(element => element.toUpperCase().includes(word.toUpperCase()));
+                            if(inThird == false){
+                                let inFourth = fourthQuarter.some(element => element.toUpperCase().includes(word.toUpperCase()));
+                                if(inFourth == false){
                                     let index = filteredRecipes.findIndex(element => element == recipe);
-                                    if (!indexSelectedItem.includes(index)){
-                                        indexSelectedItem.push(index);
-                                    }
+                                        if (!indexSelectedItem.includes(index)){
+                                            indexSelectedItem.push(index);
+                                        }
                                 }
                             }
                         }
