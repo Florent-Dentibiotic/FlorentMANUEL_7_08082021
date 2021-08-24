@@ -135,6 +135,13 @@ firstInputSearch.addEventListener('keyup', function () {
 })
 inputsSearchNodes.forEach(element => element.addEventListener('keyup', function () { searchItems(element) }));
 crossCloseModal.addEventListener('click', closeRecipeModal);
+document.addEventListener('keydown', event => {
+    if (event.code == "Escape") {
+        if (recipeModal.style.display == 'block') {
+            closeRecipeModal();
+        }
+    }
+});
 
 // FUNCTIONS 
 function deployJSON(recipes) {
