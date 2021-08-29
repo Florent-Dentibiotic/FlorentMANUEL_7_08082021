@@ -36,7 +36,7 @@ class DeployItemFactory {
             newLi.textContent = element;
         }
     }
-};
+}
 
 class FilterRecipes {
 
@@ -48,7 +48,7 @@ class FilterRecipes {
             }
         }
     }
-};
+}
 
 class SizeFactory {
 
@@ -67,7 +67,7 @@ class SizeFactory {
             btnOrigin.lastElementChild.firstElementChild.placeholder = placeholderValue;
         }
     }
-};
+}
 
 class ItemSearchFactory {
 
@@ -81,7 +81,7 @@ class ItemSearchFactory {
         }
     }
 
-};
+}
 
 class FilterItemsFactory {
 
@@ -108,7 +108,7 @@ class FilterItemsFactory {
         }
     }
 
-};
+}
 
 // JSON extraction
 fetch(myRequest)
