@@ -199,21 +199,21 @@ p {
   gap: 50px;
 }
 .recipes .recipe {
+  cursor: pointer;
   background-color: #E7E7E7;
   border-radius: 5px;
 }
 .recipes .recipe__img {
   height: 178px;
-  background-color: #C7BEBE;
+  background-color: #E7E7E7;
   border-radius: 5px 5px 0 0;
   text-align: center;
 }
 .recipes .recipe__img img {
   border-radius: 5px 5px 0 0;
-  width: 380px;
+  min-width: 380px;
   max-height: 178px;
   object-fit: cover;
-  opacity: 0.5;
 }
 .recipes .recipe__details {
   padding: 20px 18px 15px 20px;
@@ -287,6 +287,7 @@ p {
   background-color: #fff;
 }
 .recipe__modal .fa-times {
+  cursor: pointer;
   color: #3282F7;
   font-size: 50px;
   position: absolute;

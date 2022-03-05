@@ -4,6 +4,7 @@
         "id": 1,
         "name" : "Limonade de Coco",
         "servings" : 1,
+        "poster": "limonade_coco.jpeg",
         "ingredients": [
             {
                 "ingredient" : "Lait de coco",
@@ -37,6 +38,7 @@
         "id": 2,
         "name" : "Poisson Cru à la tahitienne",
         "servings": 2,
+        "poster": "poisson-cru-au-lait-de-coco.jpg",
         "ingredients": [
             {
                 "ingredient" : "Thon Rouge (ou blanc)",
@@ -73,6 +75,7 @@
         "id": 3,
         "name": "Poulet coco réunionnais",
         "servings": 4,
+        "poster": "poulet_coco.jpeg",
         "ingredients": [
             {
                 "ingredient": "Poulet",
@@ -108,6 +111,7 @@
         "id": 4,
         "name": "Salade de riz",
         "servings": 4,
+        "poster": "salade-riz-thon-tomate.jpg",
         "ingredients":[
             {
                 "ingredient": "Riz blanc",
@@ -146,6 +150,7 @@
         "id": 5,
         "name": "Tarte au thon",
         "servings": 4,
+        "poster": "tarte-au-thon-rapide.jpeg",
         "ingredients":[
            {
                "ingredient": "Pâte feuilletée",
@@ -185,6 +190,7 @@
         "id": 6,
         "name": "Tarte aux pommes",
         "servings": 6,
+        "poster": "tarte_aux_pommes.webp",
         "ingredients":[
             {
                 "ingredient": "Pâte brisée",
@@ -223,6 +229,7 @@
         "id": 7,
         "name": "Tartelettes au chocolat et aux fraises",
         "servings": 6,
+        "poster": "tarte-fraise-chocolat.jpg",
         "ingredients":[
             {
                 "ingredient": "Pâte sablée",
@@ -256,6 +263,7 @@
         "id": 8,
         "name": "Brownie",
         "servings": 10,
+        "poster": "brownie.jpg",
         "ingredients":[
            {
                 "ingredient": "Noix",
@@ -297,6 +305,7 @@
         "id": 9,
         "name": "Salade Méditerannéene fraiche au chèvre",
         "servings": 4,
+        "poster": "salade-de-tomates-x-brousse-de-chevre-frais-d-armand-arnal-chef-de-la-chassagnette.jpg",
         "ingredients":[
             {
                 "ingredient": "Concombre",
@@ -329,6 +338,7 @@
         "id": 10,
         "name": "Tartiflette",
         "servings": 4,
+        "poster": "tartiflette.webp",
         "ingredients":[
             {
                 "ingredient": "Roblochon",
@@ -363,6 +373,7 @@
         "id": 11,
         "name": "Salade tomate, mozzarella et pommes",
         "servings": 4,
+        "poster": "salade-tomate-mozzarella.jpg",
         "ingredients":[
             {
                 "ingredient": "Tomates cerises",
@@ -394,13 +405,14 @@
             }
         ],
         "time": 10,
-        "description": "Commencer par couper les feuilles de salade, ajouter les tomates cerises et le fromage découpé en cubes ou en boules avec la cuillère à melon. Découper le jambon de parme en fines lamelles. Ajouter la pomme elle aussi découpée en petit morceaux. Assaisonnez à votre gout. ",
+        "description": "Commencer par couper les feuilles de salade, ajouter les tomates cerises et le fromage découpé en cubes ou en boules avec la cuillère à melon. Découper le jambon de parme en fines lamelles. Ajouter la pomme elle aussi découpée en petit morceaux. Assaisonnez à votre gout.",
         "appliance": "Saladier",
         "ustensils": ["couteau", "cuillère à melon" ]
     },{
         "id": 12,
         "name": "Compote pomme rhubarbe",
         "servings": 4,
+        "poster": "compote-pomme-poire-et-rhubarbe.jpeg",
         "ingredients":[
             {
                 "ingredient": "Rhubarbe",
@@ -429,8 +441,9 @@
     },
     {
         "id": 13,
-        "name": "Salade mâchée de patates",
+        "name": "Salade de mâche et patates",
         "servings": 2,
+        "poster": "salade_mache_patate.jpg",
         "ingredients": [
             {
                 "ingredient": "Mâche",
@@ -467,6 +480,7 @@
         "id": 14,
         "name": "Galette Bretonne Saucisse et Fromage à raclette",
         "servings": 2,
+        "poster": "galette-saucisse-oignons-roscoff.webp",
         "ingredients": [
             {
                 "ingredient": "Saucisse bretonne ou de toulouse",
@@ -507,6 +521,7 @@
         "id": 15,
         "name": "Crêpes Chocolat Banane",
         "servings": 10,
+        "poster": "crepe_chocolat_banane.jpg",
         "ingredients": [
             {
                 "ingredient": "Oeuf",
@@ -546,6 +561,7 @@
         "id": 16,
         "name": "Gratin de pâtes à la tomate",
         "servings": 2,
+        "poster": "gratin_pate_tomate.jpg",
         "ingredients": [
             {
                 "ingredient": "Tomate",
@@ -582,6 +598,7 @@
         "id": 17,
         "name": "Smoothie à la fraise",
         "servings": 6,
+        "poster": "Smoothie-fraise-banane-yaourt.jpg",
         "ingredients": [
             {
                 "ingredient": "Fraise",
@@ -614,6 +631,7 @@
         "id": 18,
         "name": "Smoothie ananas et vanille",
         "servings": 5,
+        "poster": "Smoothie-Ananas-mangue-lime-vanille.jpg",
         "ingredients": [
             {
                 "ingredient": "Ananas",
@@ -637,8 +655,9 @@
     },
     {
         "id": 19,
-        "name": "Shake Banane Kiwi",
+        "name": "Milkshake Banane Kiwi",
         "servings": 4,
+        "poster": "smoothie-banane-raisin-kiwi.jpg",
         "ingredients": [
             {
                 "ingredient": "Kiwi",
@@ -672,6 +691,7 @@
         "id": 20,
         "name": "Pates Carbonara",
         "servings": 5,
+        "poster": "pate_carbonara.webp",
         "ingredients": [
             {
                 "ingredient": "Tagliatelles",
@@ -708,6 +728,7 @@
         "id": 21,
         "name": "Spaghettis à la bolognaise",
         "servings": 4,
+        "poster": "spaghettis-alla-bolognese.jpeg",
         "ingredients": [
             {
                 "ingredient": "Spaghettis",
@@ -748,6 +769,7 @@
         "id": 22,
         "name": "Fondant au chocolat",
         "servings": 4,
+        "poster": "fondant-au-chocolat.jpg",
         "ingredients": [
             {
                 "ingredient": "Beurre",
@@ -783,6 +805,7 @@
         "id": 23,
         "name": "Quiche lorraine",
         "servings": 4,
+        "poster": "quiche-lorraine.jpg",
         "ingredients": [
             {
                 "ingredient": "Pâte brisée",
@@ -823,6 +846,7 @@
         "id": 24,
         "name": "Salade de pâtes",
         "servings": 4,
+        "poster": "comment-faire-une-salade-de-pates-comme-en-italie.jpg",
         "ingredients": [
             {
                 "ingredient": "Thon en miettes",
@@ -862,6 +886,7 @@
         "id": 25,
         "name": "Cookies",
         "servings": 4,
+        "poster": "cookies.jpeg",
         "ingredients": [
             {
                 "ingredient": "Sucre",
@@ -897,6 +922,7 @@
         "id": 26,
         "name": "Soupe de tomates",
         "servings": 2,
+        "poster": "recette-de-soupe-de-tomates-maison.jpg",
         "ingredients": [
             {
                 "ingredient": "Tomate",
@@ -928,6 +954,7 @@
         "id": 27,
         "name": "Soupe à l'oseille",
         "servings": 4,
+        "poster": "Velouté-à-loseille.jpg",
         "ingredients": [
             {
                 "ingredient": "Oseille",
@@ -962,6 +989,7 @@
         "id": 28,
         "name": "Soupe de poireaux",
         "servings": 4,
+        "poster": "soupe-poireaux-pommes-de-terre-au-fenouil.jpg",
         "ingredients": [
             {
                 "ingredient": "Poireau",
@@ -997,6 +1025,7 @@
         "id": 29,
         "name": "Houmous Express",
         "servings": 2,
+        "poster": "houmous.jpg",
         "ingredients": [
             {
                 "ingredient": "Pois chiches",
@@ -1028,6 +1057,7 @@
         "id": 30,
         "name": "Purée de pois cassés",
         "servings": 4,
+        "poster": "puree-pois-casses-poulet-recette.jpg",
         "ingredients": [
             {
                 "ingredient": "Pois Cassé",
@@ -1053,6 +1083,7 @@
         "id": 31,
         "name": "Jardinière de légumes",
         "servings": 4,
+        "poster": "jardiniere-de-petits-legumes-de-printemps.jpeg",
         "ingredients": [
             {
                 "ingredient": "Carotte",
@@ -1087,6 +1118,7 @@
         "id": 32,
         "name": "Croque Monsieur à la dinde",
         "servings": 4,
+        "poster": "Croque-Monsieur-au-jambon-de-dinde.jpg",
         "ingredients": [
             {
                 "ingredient": "Pain de mie",
@@ -1128,6 +1160,7 @@
         "id": 33,
         "name": "Sandwich au saumon fumé",
         "servings": 4,
+        "poster": "sandwich-au-saumon-fume.jpeg",
         "ingredients": [
             {
                 "ingredient": "Pain de mie",
@@ -1163,6 +1196,7 @@
         "id": 34,
         "name": "Purée de patate douce",
         "servings": 4,
+        "poster": "puree-de-patates-douces.jpeg",
         "ingredients": [
             {
                 "ingredient": "Patate douce",
@@ -1191,6 +1225,7 @@
         "id": 35,
         "name": "Purée de carottes",
         "servings": 2,
+        "poster": "Purée-de-carotte-onctueuse-au-cumin.jpg",
         "ingredients": [
             {
                 "ingredient": "Carotte",
@@ -1230,6 +1265,7 @@
         "id": 36,
         "name": "Lasagne Courgettes et Chèvre",
         "servings": 2,
+        "poster": "lasagnes_courgette_chevre.jpg",
         "ingredients": [
             {
                 "ingredient": "Courgette",
@@ -1269,6 +1305,7 @@
         "id": 37,
         "name": "Courgettes farcies au boeuf",
         "servings": 2,
+        "poster": "courgettes-farcies-boeuf-et-amandes.jpeg",
         "ingredients": [
             {
                 "ingredient": "Courgette",
@@ -1309,6 +1346,7 @@
         "id": 38,
         "name": "Pain Perdu",
         "servings": 4,
+        "poster": "pain-perdu.jpg",
         "ingredients": [
             {
                 "ingredient": "Pain",
@@ -1339,6 +1377,7 @@
         "id": 39,
         "name": "Crumble aux pommes",
         "servings": 40,
+        "poster": "crumble-pommes-poires.jpeg",
         "ingredients": [
             {
                 "ingredient": "Pomme",
@@ -1369,6 +1408,7 @@
         "id": 40,
         "name": "Limonade",
         "servings": 4,
+        "poster": "limonade.jpeg",
         "ingredients": [
             {
                 "ingredient": "Eau",
@@ -1399,6 +1439,7 @@
         "id": 41,
         "name": "Mousse au chocolat",
         "servings": 4,
+        "poster": "mousse_chocolat.jpg",
         "ingredients": [
             {
                 "ingredient": "Oeuf",
@@ -1424,6 +1465,7 @@
         "id": 42,
         "name": "Charlotte au poires",
         "servings": 3,
+        "poster": "charlotte-poire-chocolat.jpeg",
         "ingredients": [
             {
                 "ingredient": "Chocolat",
@@ -1453,6 +1495,7 @@
         "id": 43,
         "name": "Tarte au citron",
         "servings": 6,
+        "poster": "tarte-citron-chantilly.jpg",
         "ingredients": [
             {
                 "ingredient": "Pâte brisée",
@@ -1486,6 +1529,7 @@
         "id": 44,
         "name": "Crème dessert au chocolat",
         "servings": 6,
+        "poster": "creme_chocolat.jpg",
         "ingredients": [
             {
                 "ingredient": "Lait",
@@ -1522,6 +1566,7 @@
         "id": 45,
         "name": "Crème patissière",
         "servings": 8,
+        "poster": "creme-patissiere.jpg",
         "ingredients": [
             {
                 "ingredient": "Lait",
@@ -1544,7 +1589,7 @@
             }
         ],
         "time": 30,
-        "description":"Faire bouillir le lait ( on peut y ajouter de l'essence de vanille. Battre les oeufs et le sucre, ajouter la farine puis finalement ajouter le lait chaud. Remettre à feu doux pour faire épaissir en remuant pendant 5 à 10 minutes.",
+        "description":"Faire bouillir le lait (on peut y ajouter de l'essence de vanille). Battre les oeufs et le sucre, ajouter la farine puis finalement ajouter le lait chaud. Remettre à feu doux pour faire épaissir en remuant pendant 5 à 10 minutes.",
         "appliance": "Casserole",
         "ustensils":["fouet","saladier"]
     },
@@ -1552,6 +1597,7 @@
         "id": 46,
         "name": "Far breton",
         "servings": 6,
+        "poster": "far-breton-drapeau-gateau.jpg",
         "ingredients": [
             {
                 "ingredient": "farine",
@@ -1592,6 +1638,7 @@
         "id": 47,
         "name": "Mousse au citron",
         "servings": 6,
+        "poster": "recette-mousse-citron-mascarpone.jpg",
         "ingredients": [
             {
                 "ingredient": "Jus de citron",
@@ -1623,6 +1670,7 @@
         "id": 48,
         "name": "Pizza",
         "servings": 4,
+        "poster": "pizza.jpg",
         "ingredients": [
             {
                 "ingredient": "Pâte à pizza",
@@ -1658,6 +1706,7 @@
         "id": 49,
         "name": "Smoothie tropical",
         "servings": 4,
+        "poster": "smoothie_tropical.webp",
         "ingredients": [
             {
                 "ingredient": "Banane",
@@ -1689,8 +1738,9 @@
     },
     {
         "id": 50,
-        "name": "Frangipane",
+        "name": "Galette des Rois",
         "servings": 2,
+        "poster": "galette-des-rois-a-la-frangipane.jpg",
         "ingredients": [
             {
                 "ingredient": "Pâte feuilletée",

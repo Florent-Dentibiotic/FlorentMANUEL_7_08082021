@@ -157,7 +157,7 @@ function deployJSON(recipes) {
         newRecipeImg.classList.add('recipe__img');
         let newImg = document.createElement('img');
         newRecipeImg.appendChild(newImg)
-        newImg.setAttribute('src', './img/sarah_kitchen_supplies_red_adjusted.jpg')
+        newImg.setAttribute('src', `./img/recipes/${recipe.poster}`)
         newImg.setAttribute('alt', 'Recipe illustration')
         let newRecipeDetails = document.createElement('div');
         newRecipe.appendChild(newRecipeDetails);

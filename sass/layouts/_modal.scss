@@ -9,6 +9,7 @@
     overflow: auto;
     background-color: $white;
     .fa-times{
+        cursor: pointer;
         color: $primary;
         font-size: 50px;
         position: absolute;
