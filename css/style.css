@@ -41,13 +41,13 @@ p {
   position: relative;
 }
 .btn__primary {
-  background-color: #3282F7;
+  background-color: #698AF0;
 }
 .btn__secondary {
-  background-color: #68D9A4;
+  background-color: #73D990;
 }
 .btn__tertiary {
-  background-color: #ED6454;
+  background-color: #D96A62;
 }
 .btn__group {
   display: flex;
@@ -68,13 +68,30 @@ p {
   text-overflow: ellipsis;
 }
 .input__search__primary {
-  background-color: #3282F7;
+  background-color: #698AF0;
 }
 .input__search__secondary {
-  background-color: #68D9A4;
+  background-color: #73D990;
 }
 .input__search__tertiary {
-  background-color: #ED6454;
+  background-color: #D96A62;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: darkslategrey;
+  opacity: 1;
+  /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: darkslategrey;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: darkslategrey;
 }
 
 .fa-search {
@@ -100,6 +117,7 @@ p {
 }
 
 .fa-times-circle {
+  cursor: pointer;
   margin-left: 0.5em;
 }
 
@@ -157,15 +175,15 @@ p {
 }
 
 .ingredients__menu {
-  background-color: #3282F7;
+  background-color: #698AF0;
 }
 
 .appliance__menu {
-  background-color: #68D9A4;
+  background-color: #73D990;
 }
 
 .ustensils__menu {
-  background-color: #ED6454;
+  background-color: #D96A62;
 }
 
 .selected__items {
@@ -182,13 +200,13 @@ p {
   color: #fff;
 }
 .selected__items__ingredient {
-  background-color: #3282F7;
+  background-color: #698AF0;
 }
 .selected__items__appliance {
-  background-color: #68D9A4;
+  background-color: #73D990;
 }
 .selected__items__ustensil {
-  background-color: #ED6454;
+  background-color: #D96A62;
 }
 
 .recipes {
@@ -288,7 +306,7 @@ p {
 }
 .recipe__modal .fa-times {
   cursor: pointer;
-  color: #3282F7;
+  color: #698AF0;
   font-size: 50px;
   position: absolute;
   top: 0.7em;
