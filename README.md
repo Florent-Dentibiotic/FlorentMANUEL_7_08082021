@@ -1,6 +1,6 @@
 # Les petits plats
 
-Projet 7 du parcours Développeur Web Front-End d'OpenClassRooms.
+Projet 7 du parcours **Développeur Web Front-End** d'OpenClassRooms.
 
 ## Pages
 
