@@ -52,12 +52,14 @@
                 padding: 0;
             }
             p{
-                display: block;
                 grid-area: d;
                 overflow: hidden;
                 white-space: pre-line;
                 text-overflow: ellipsis;
-                height: 116px;
+                display: -webkit-box;
+                -webkit-line-clamp: 8;
+                -webkit-box-orient: vertical;
+                height: 113px;
                 width: 171px;
             }
         }
